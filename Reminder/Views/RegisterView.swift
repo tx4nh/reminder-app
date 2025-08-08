@@ -1,15 +1,14 @@
 import SwiftUI
 
-struct SignInView: View {
+struct RegisterView: View {
     @State var email: String
     @State var password: String
-    @State var isRegister: Bool = false
     
     @Binding var appUser: AppUser
     
     var body: some View {
         VStack{
-            Text("Đăng Nhập")
+            Text("Đăng Kí")
                 .font(.system(size: 28, weight: .thin))
                 .foregroundColor(.primary)
                 .tracking(3)
@@ -31,7 +30,7 @@ struct SignInView: View {
             Button {
                 print("1")
             } label: {
-                Text("Đăng Nhập")
+                Text("Đăng Kí")
                     .padding()
                     .frame(maxWidth: .infinity)
                     .foregroundStyle(Color(uiColor: .systemBackground))
@@ -42,18 +41,6 @@ struct SignInView: View {
             }
             .padding(.top, 15)
             .padding(.horizontal, 70)
-            
-            Button {
-                isRegister.toggle()
-            } label: {
-                Text("Bạn chưa có tài khoản")
-                Text("Đăng Kí")
-                    .underline()
-            }
-            .padding(.top, 15)
-            .sheet(isPresented: $isRegister) {
-    //            RegisterView()
-            }
             Spacer()
         }
         .padding()
@@ -61,5 +48,5 @@ struct SignInView: View {
 }
 
 #Preview {
-    SignInView(email: "", password: "", appUser: .constant(AppUser(uid: "", email: "")))
+    RegisterView(email: "", password: "", appUser: .constant(AppUser(uid: "", email: "")))
 }
