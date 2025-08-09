@@ -12,6 +12,7 @@ struct TextFieldView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(Color(uiColor: .label), lineWidth: 1)
             }
+            .textInputAutocapitalization(.never)
     }
 }
 

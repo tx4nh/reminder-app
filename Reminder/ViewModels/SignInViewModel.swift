@@ -11,16 +11,18 @@ class SignInViewModel{
     
     func registerNewUserWithEmail(email: String, password: String) async throws -> AppUser {
         if isFormValid(email: email, password: password) {
-            try await registerNewUserWithEmail(email: email, password: password)
+            return try await AuthManager.shared.registerNewUserWithEmail(email: email, password: password)
         } else {
+            print("Register form is invalid")
             throw NSError()
         }
     }
     
     func signInWithEmail(email: String, password: String) async throws -> AppUser {
         if isFormValid(email: email, password: password) {
-            try await signInWithEmail(email: email, password: password)
+            return try await AuthManager.shared.signInWithEmail(email: email, password: password)
         } else {
+            print("SignIn form is invalid")
             throw NSError()
         }
     }

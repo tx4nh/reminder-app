@@ -4,7 +4,8 @@ import SwiftUI
 struct ReminderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            SignInView(email: "", password: "", appUser: .constant(AppUser(uid: "", email: "")))
         }
     }
 }

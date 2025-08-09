@@ -6,6 +6,7 @@ struct SignInView: View {
     @State var isRegister: Bool = false
     
     @Binding var appUser: AppUser
+    @State private var viewModel = SignInViewModel()
     
     var body: some View {
         VStack{
@@ -29,7 +30,15 @@ struct SignInView: View {
             SecureFieldView(password: $password)
             
             Button {
-                print("1")
+                Task{
+                    do{
+                        let user = try await viewModel.signInWithEmail(email: email, password: password)
+                        self.appUser = user
+                        print("Success signin")
+                    } catch{
+                        print("Error")
+                    }
+                }
             } label: {
                 Text("Đăng Nhập")
                     .padding()
@@ -46,13 +55,13 @@ struct SignInView: View {
             Button {
                 isRegister.toggle()
             } label: {
-                Text("Bạn chưa có tài khoản")
+                Text("Bạn chưa có tài khoản ?")
                 Text("Đăng Kí")
                     .underline()
             }
             .padding(.top, 15)
             .sheet(isPresented: $isRegister) {
-    //            RegisterView()
+                RegisterView(email: "", password: "", appUser: .constant(AppUser(uid: "", email: "")), viewModel: SignInViewModel())
             }
             Spacer()
         }
