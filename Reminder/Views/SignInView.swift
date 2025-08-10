@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct SignInView: View {
-    @State var email: String
-    @State var password: String
+    @State var email: String = ""
+    @State var password: String = ""
     @State var isRegister: Bool = false
     
-    @Binding var appUser: AppUser
+    @Binding var appUser: AppUser?
     @State private var viewModel = SignInViewModel()
     
     var body: some View {
@@ -61,7 +61,12 @@ struct SignInView: View {
             }
             .padding(.top, 15)
             .sheet(isPresented: $isRegister) {
-                RegisterView(email: "", password: "", appUser: .constant(AppUser(uid: "", email: "")), viewModel: SignInViewModel())
+                RegisterView(
+                    email: "",
+                    password: "",
+                    appUser: $appUser,
+                    viewModel: SignInViewModel()
+                )
             }
             Spacer()
         }
@@ -70,5 +75,5 @@ struct SignInView: View {
 }
 
 #Preview {
-    SignInView(email: "", password: "", appUser: .constant(AppUser(uid: "", email: "")))
+    SignInView(appUser: .constant(nil))
 }

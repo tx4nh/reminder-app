@@ -1,14 +1,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var appUser: AppUser? = nil
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if let user = appUser {
+                MainView(appUser: user, onSignOut: {
+                    appUser = nil
+                })
+            } else {
+                SignInView(appUser: $appUser)
+            }
         }
-        .padding()
+        .animation(.easeInOut(duration: 0.3), value: appUser != nil)
     }
 }
 
