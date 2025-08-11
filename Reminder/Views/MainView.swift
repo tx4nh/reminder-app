@@ -63,105 +63,65 @@ struct MainView: View {
             
             Spacer()
             
-            VStack(spacing: 20) {
-                VStack(spacing: 12) {
-                    HStack {
-                        Image(systemName: "person.circle.fill")
-                            .font(.system(size: 24))
-                            .foregroundColor(.blue)
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("User ID")
-                                .font(.caption)
-                                .fontWeight(.medium)
-                                .foregroundColor(.secondary)
-                            
-                            Text(appUser.uid)
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.primary)
-                        }
-                        
-                        Spacer()
-                    }
-                    
-                    Divider()
-                    
-                    HStack {
-                        Image(systemName: "envelope.fill")
-                            .font(.system(size: 24))
-                            .foregroundColor(.green)
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Email")
-                                .font(.caption)
-                                .fontWeight(.medium)
-                                .foregroundColor(.secondary)
-                            
-                            Text(appUser.email ?? "No email")
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.primary)
-                        }
-                        
-                        Spacer()
-                    }
-                }
-                .padding(20)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color(.systemBackground))
-                        .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 4)
-                )
-            }
-            .padding(.horizontal, 20)
+            Text("Chưa có lịch trình nào được thêm")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.secondary)
+                .padding(.horizontal, 24)
+                .padding(.vertical, 16)
             
             Spacer()
-            
+
             VStack(spacing: 16) {
-                HStack(spacing: 12) {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.system(size: 28))
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [.blue, .cyan],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+                Button{
+                    print("Add Calendar")
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                    impactFeedback.impactOccurred()
+                }label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: 28))
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [.blue, .cyan],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
                             )
-                        )
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Tạo lịch trình mới")
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.primary)
                         
-                        Text("Hãy thêm các hoạt động để nhận thông báo")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Tạo lịch trình mới")
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
+                            
+                            Text("Hãy thêm các hoạt động để nhận thông báo")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.gray)
                     }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.gray)
-                }
-                .padding(20)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(
-                            LinearGradient(
-                                colors: [Color(.systemGray6), Color(.systemGray5)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+                    .padding(20)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color(.systemGray6), Color(.systemGray5)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
                             )
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.blue.opacity(0.2), lineWidth: 1)
-                        )
-                )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.blue.opacity(0.2), lineWidth: 1)
+                            )
+                    )
+                }
+                .buttonStyle(CustomButtonStyle())
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 40)
@@ -176,6 +136,15 @@ struct MainView: View {
                 endPoint: .bottom
             )
         )
+    }
+}
+
+struct CustomButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
 }
 
