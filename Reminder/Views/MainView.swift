@@ -11,7 +11,7 @@ struct MainView: View {
                     Text("Xin chào!")
                         .font(.title)
                         .fontWeight(.bold)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color(uiColor: .label))
                     Spacer()
                     Button(action: {
                         onSignOut()
