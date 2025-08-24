@@ -91,7 +91,7 @@ struct MainView: View {
 
                 VStack{
                     NavigationLink {
-                        AddCalendarView()
+                        AddScheduleView(appUser: appUser)
                     } label: {
                         HStack(spacing: 12) {
                             Image(systemName: "plus.circle.fill")
@@ -152,15 +152,6 @@ struct MainView: View {
                     endPoint: .bottom
                 )
             )
-        }
-        .onAppear{
-            Task{
-                do{
-                    try await ScheduleViewModel().insertSchedule(user_uid: appUser.uid, text: "Learn IOS", time: "07:30")
-                } catch{
-                    print(error)
-                }
-            }
         }
     }
 }
