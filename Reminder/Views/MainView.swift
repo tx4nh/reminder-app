@@ -153,6 +153,15 @@ struct MainView: View {
                 )
             )
         }
+        .onAppear{
+            Task{
+                do{
+                    try await ScheduleViewModel().insertSchedule(user_uid: appUser.uid, text: "Learn IOS", time: "07:30")
+                } catch{
+                    print(error)
+                }
+            }
+        }
     }
 }
 
