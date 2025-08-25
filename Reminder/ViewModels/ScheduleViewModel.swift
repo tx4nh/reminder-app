@@ -7,6 +7,7 @@ class ScheduleViewModel{
         .init(user_uid: "", text: "eat", time: "10:30"),
         .init(user_uid: "", text: "learn", time: "13:30"),
         .init(user_uid: "", text: "gym", time: "17:30"),
+        .init(user_uid: "", text: "game", time: "19:30"),
         .init(user_uid: "", text: "sleep", time: "22:30"),
     ]
     

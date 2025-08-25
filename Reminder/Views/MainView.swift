@@ -3,7 +3,6 @@ import SwiftUI
 struct MainView: View {
     let appUser: AppUser
     let onSignOut: () -> Void
-    @State private var modelTest = ModelTest()
     
     var body: some View {
         NavigationStack {
@@ -65,27 +64,13 @@ struct MainView: View {
                 
                 Spacer()
                 
-                Text("Chưa có lịch trình nào được thêm")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 16)
-                
-                TextField("Name", text: $modelTest.name)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color(uiColor: .label), lineWidth: 2)
-                    }
-                    .padding()
-                
-                NavigationLink {
-                    ChangeName(modelTest: modelTest)
-                } label: {
-                    Text("Change name")
-                }
-
+//                Text("Chưa có lịch trình nào được thêm")
+//                    .font(.system(size: 16, weight: .medium))
+//                    .foregroundColor(.secondary)
+//                    .padding(.horizontal, 24)
+//                    .padding(.vertical, 16)
+//                
+                ScheduleView()
                 
                 Spacer()
 
