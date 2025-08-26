@@ -90,12 +90,12 @@ struct MainView: View {
                                 )
                             
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Tạo lịch trình mới")
+                                Text("Thêm lịch trình mới")
                                     .font(.headline)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.primary)
                                 
-                                Text("Hãy thêm các hoạt động để nhận thông báo")
+                                Text("Để nhận thông báo")
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }
