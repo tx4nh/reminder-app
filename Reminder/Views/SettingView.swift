@@ -4,7 +4,7 @@ struct SettingView: View {
     let onSignOut: () -> Void
     
     var body: some View {
-        HStack {
+        VStack {
             Text("Xin chào!")
                 .font(.title)
                 .fontWeight(.bold)
@@ -20,17 +20,19 @@ struct SettingView: View {
                         .font(.system(size: 14, weight: .medium))
                 }
             })
+            .frame(maxWidth: .infinity)
+            .frame(height: 30)
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
             .background(
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 10)
                     .fill(Color.red)
                     .shadow(color: Color.red.opacity(0.3), radius: 4, x: 0, y: 2)
             )
             .foregroundColor(.white)
         }
         .padding(.horizontal, 20)
-        .padding(.top, 10)
+        .padding(.vertical, 20)
     }
 }
 

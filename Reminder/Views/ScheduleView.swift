@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ScheduleView: View {
+    let appUser: AppUser
     @State private var viewModel = ScheduleViewModel()
     
     var body: some View {
@@ -18,18 +19,6 @@ struct ScheduleView: View {
                 
                 ScrollView {
                     LazyVStack(spacing: 16) {
-//                        VStack {
-//                            Text("My Daily Schedule")
-//                                .font(.largeTitle)
-//                                .fontWeight(.bold)
-//                                .foregroundColor(.primary)
-//                            
-//                            Text("Today's Tasks")
-//                                .font(.subheadline)
-//                                .foregroundColor(.secondary)
-//                        }
-//                        .padding(.top, 20)
-//                        .padding(.bottom, 10)
                         
                         ForEach(viewModel.test, id: \.text) { schedule in
                             ScheduleItemView(schedule: schedule)
@@ -40,6 +29,15 @@ struct ScheduleView: View {
                 }
             }
             .navigationBarHidden(true)
+        }
+        .onAppear {
+            Task{
+                do{
+                    try await viewModel.fetchSchedule(for: appUser.uid)
+                } catch{
+                    print("Error fetch")
+                }
+            }
         }
     }
 }
@@ -61,14 +59,10 @@ struct ScheduleItemView: View {
     var body: some View {
         HStack(spacing: 16) {
             VStack {
-                Text(schedule.time)
+                Text(schedule.displayTime)
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(timeColor)
-//                
-//                Circle()
-//                    .fill(timeColor)
-//                    .frame(width: 8, height: 8)
             }
             .frame(width: 80)
             
@@ -81,10 +75,6 @@ struct ScheduleItemView: View {
                     Text(schedule.text.capitalized)
                         .font(.headline)
                         .foregroundColor(.primary)
-                    
-                    Text("Scheduled task")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
                 }
                 
                 Spacer()
@@ -119,5 +109,6 @@ struct ScheduleItemView: View {
 }
 
 #Preview {
-    ScheduleView()
+    ScheduleView(appUser: AppUser(uid: "2311", email: "atdevv@gmail.com"))
 }
+

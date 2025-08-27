@@ -35,7 +35,7 @@ struct ContentView: View {
                 
                 self.appUser = user
             } catch{
-                print("Error kaka")
+                print("No User")
             }
         }
     }

@@ -4,6 +4,10 @@ struct Schedule: Codable {
     let user_uid: String
     var text: String
     var time: String
+    
+    var displayTime: String {
+        String(time.prefix(5)) // "08:30:00" -> "08:30"
+    }
 }
 
 class DatabaseManager{
@@ -14,7 +18,16 @@ class DatabaseManager{
         print(response.status)
     }
     
-//    func fetchSchedule(schedule: Schedule) async throws {
-//        let sche: [Schedule] = try await supabase.from("schedules").select().execute().value
-//    }
+    func fetchSchedule(for uid: String) async throws -> [Schedule] {
+        let schedule: [Schedule] = try await supabase.from(
+            "schedules"
+        ).select().eq(
+            "user_uid",
+            value: uid
+        ).order(
+            "time",
+            ascending: true
+        ).execute().value
+        return schedule
+    }
 }

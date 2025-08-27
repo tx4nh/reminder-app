@@ -42,7 +42,7 @@ struct MainView: View {
 //                    .padding(.horizontal, 24)
 //                    .padding(.vertical, 16)
 //                
-                ScheduleView()
+                ScheduleView(appUser: appUser)
                 
                 Spacer()
 
@@ -96,7 +96,7 @@ struct MainView: View {
                     }
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 40)
+                .padding(.bottom, 30)
 
             }
             .background(

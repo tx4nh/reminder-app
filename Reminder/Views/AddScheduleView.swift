@@ -153,14 +153,14 @@ struct AddScheduleView: View {
         
         print(text, time, separator: " ")
         
-        // Task{
-        //     do{
-        //         try await ScheduleViewModel().insertSchedule(user_uid: appUser.uid, text: text, time: time)
-        //         presentationMode.wrappedValue.dismiss()
-        //     } catch{
-        //         print(error)
-        //     }
-        // }
+         Task{
+             do{
+                 try await ScheduleViewModel().insertSchedule(user_uid: appUser.uid, text: text, time: time)
+                 presentationMode.wrappedValue.dismiss()
+             } catch{
+                 print(error)
+             }
+         }
         
         presentationMode.wrappedValue.dismiss()
     }
