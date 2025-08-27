@@ -7,7 +7,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if let user = appUser {
-                MainView(appUser: user, onSignOut: {
+                MainTabView(appUser: user, onSignOut: {
                     Task{
                         try await supabase.auth.signOut()
                         appUser = nil

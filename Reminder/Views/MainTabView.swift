@@ -7,16 +7,13 @@ struct MainTabView: View {
     var body: some View {
         TabView{
             Tab("Main View", systemImage: "house.fill") {
-                    MainView(appUser: appUser, onSignOut: {
-                        Task{
-                            try await supabase.auth.signOut()
-//                            appUser = nil
-                        }
-                    })
+                    MainView(appUser: appUser)
             }
             
-            Tab("Ca Nhan", systemImage: "person.fill") {
-                Text("Ca nhan day")
+            Tab("Cài Đặt", systemImage: "gearshape.fill") {
+                SettingView {
+                        onSignOut()
+                }
             }
         }
         .tabViewStyle(.sidebarAdaptable)
@@ -28,4 +25,3 @@ struct MainTabView: View {
         print("Sign Out")
     })
 }
-    
