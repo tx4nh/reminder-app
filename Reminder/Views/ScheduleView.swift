@@ -17,15 +17,22 @@ struct ScheduleView: View {
                 )
                 .ignoresSafeArea()
                 
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        
-                        ForEach(viewModel.test, id: \.text) { schedule in
-                            ScheduleItemView(schedule: schedule)
+                if viewModel.scheduleView.isEmpty {
+                    Text("Chưa có lịch trình nào được thêm")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 16)
+                } else {
+                    ScrollView {
+                        LazyVStack(spacing: 16) {
+                            ForEach(Array(viewModel.scheduleView.enumerated()), id: \.element.time) { index, schedule in
+                                ScheduleItemView(schedule: schedule, colorIndex: index)
+                            }
                         }
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 20)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 20)
                 }
             }
             .navigationBarHidden(true)
@@ -44,16 +51,17 @@ struct ScheduleView: View {
 
 struct ScheduleItemView: View {
     let schedule: Schedule
+    let colorIndex: Int
+    var index = 0
+
+    private let arrColors: [Color] = [
+        .red, .blue, .green, .orange, .purple, .pink,
+        .yellow, .cyan, .mint, .indigo, .brown, .teal
+    ]
     
     private var timeColor: Color {
-        switch schedule.time.prefix(2) {
-        case "08": return .orange
-        case "10": return .green
-        case "13": return .blue
-        case "17": return .purple
-        case "22": return .indigo
-        default: return .gray
-        }
+        let index = colorIndex % arrColors.count
+        return arrColors[index]
     }
     
     var body: some View {

@@ -36,12 +36,6 @@ struct MainView: View {
                 
                 Spacer()
                 
-//                Text("Chưa có lịch trình nào được thêm")
-//                    .font(.system(size: 16, weight: .medium))
-//                    .foregroundColor(.secondary)
-//                    .padding(.horizontal, 24)
-//                    .padding(.vertical, 16)
-//                
                 ScheduleView(appUser: appUser)
                 
                 Spacer()

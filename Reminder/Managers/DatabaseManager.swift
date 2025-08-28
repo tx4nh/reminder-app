@@ -6,7 +6,7 @@ struct Schedule: Codable {
     var time: String
     
     var displayTime: String {
-        String(time.prefix(5)) // "08:30:00" -> "08:30"
+        String(time.prefix(5))
     }
 }
 
