@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TextFieldView: View {
-    let placeHolder: String = "Email address"
+    let placeHolder: String = "Email"
     @Binding var email: String
     
     var body: some View {

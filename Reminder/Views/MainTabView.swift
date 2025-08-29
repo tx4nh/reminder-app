@@ -6,14 +6,14 @@ struct MainTabView: View {
     
     var body: some View {
         TabView{
-            Tab("Main View", systemImage: "house.fill") {
+            Tab("Trang Chủ", systemImage: "house.fill") {
                     MainView(appUser: appUser)
             }
             
             Tab("Cài Đặt", systemImage: "gearshape.fill") {
-                SettingView {
+                SettingView (onSignOut: {
                         onSignOut()
-                }
+                })
             }
         }
         .tabViewStyle(.sidebarAdaptable)

@@ -84,7 +84,7 @@ struct MainView: View {
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color.blue.opacity(0.2), lineWidth: 1)
+                                        .stroke(Color.blue.opacity(0.7), lineWidth: 1)
                                 )
                         )
                     }
