@@ -33,17 +33,22 @@ struct ScheduleView: View {
                         .padding(.horizontal, 20)
                         .padding(.bottom, 20)
                     }
+                    .refreshable {
+                        do {
+                            try await viewModel.fetchSchedule(for: appUser.uid)
+                        } catch {
+                            print("DEBUG: Failed to refresh schedule: \(error)")
+                        }
+                    }
                 }
             }
             .navigationBarHidden(true)
         }
-        .onAppear {
-            Task{
-                do{
-                    try await viewModel.fetchSchedule(for: appUser.uid)
-                } catch{
-                    print("Error fetch")
-                }
+        .task {
+            do{
+                try await viewModel.fetchSchedule(for: appUser.uid)
+            } catch{
+                print("Error fetch")
             }
         }
     }
