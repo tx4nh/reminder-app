@@ -5,135 +5,154 @@ struct AddScheduleView: View {
     @State private var selectedDate = Date()
     @State private var text: String = ""
     @Environment(\.presentationMode) var presentationMode
+    @FocusState private var isTextFieldFocused: Bool
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 24) {
-                HStack(spacing: 8) {
-                    Image(systemName: "calendar.badge.plus")
-                        .font(.system(size: 48))
-                        .foregroundColor(.blue)
-                    
-                    Text("Thêm Lịch Trình Mới")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.primary)
-
-                }
-                .padding(.top, 20)
-                
-                Spacer()
-                
-                VStack(spacing: 20) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Image(systemName: "text.document")
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack(spacing: 24) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "calendar.badge.plus")
+                                .font(.system(size: 48))
                                 .foregroundColor(.blue)
-                                .font(.title3)
-                            Text("Nội dung công việc")
-                                .font(.title3)
-                                .fontWeight(.medium)
+                            
+                            Text("Thêm Lịch Trình Mới")
+                                .font(.title2)
+                                .fontWeight(.semibold)
                                 .foregroundColor(.primary)
                         }
+                        .padding(.top, 20)
                         
-                        VStack(alignment: .leading, spacing: 6) {
-                            TextField("Nhập việc cần làm hôm nay...", text: $text, axis: .vertical)
-                                .frame(height: 100)
-                                .textFieldStyle(PlainTextFieldStyle())
-                                .font(.body)
+                        VStack(spacing: 20) {
+                            VStack(alignment: .leading, spacing: 12) {
+                                HStack {
+                                    Image(systemName: "text.document")
+                                        .foregroundColor(.blue)
+                                        .font(.title3)
+                                    Text("Nội dung công việc")
+                                        .font(.title3)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.primary)
+                                }
+                                
+                                VStack(alignment: .leading, spacing: 6) {
+                                    TextField("Nhập việc cần làm hôm nay...", text: $text, axis: .vertical)
+                                        .focused($isTextFieldFocused)
+                                        .frame(minHeight: 100, alignment: .topLeading)
+                                        .textFieldStyle(PlainTextFieldStyle())
+                                        .font(.body)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 12)
+                                        .background(Color(.systemBackground))
+                                        .cornerRadius(12)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .stroke(text.isEmpty ? Color.gray.opacity(0.3) : Color.blue.opacity(0.5), lineWidth: 1)
+                                        )
+                                    
+                                    Text("Mô tả chi tiết về công việc bạn cần hoàn thành")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                        .padding(.horizontal, 4)
+                                }
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 12) {
+                                HStack {
+                                    Image(systemName: "clock.fill")
+                                        .foregroundColor(.orange)
+                                        .font(.title3)
+                                    Text("Thời gian thông báo")
+                                        .font(.headline)
+                                        .foregroundColor(.primary)
+                                }
+                                
+                                HStack {
+                                    DatePicker("",
+                                             selection: $selectedDate,
+                                             displayedComponents: .hourAndMinute)
+                                        .datePickerStyle(CompactDatePickerStyle())
+                                        .labelsHidden()
+                                    
+                                    Spacer()
+                                    
+                                    VStack(alignment: .trailing) {
+                                        Text("Thời gian đã chọn")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                        Text(formatTime(selectedDate))
+                                            .font(.title2)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.orange)
+                                    }
+                                }
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 12)
                                 .background(Color(.systemBackground))
                                 .cornerRadius(12)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 12)
-                                        .stroke(text.isEmpty ? Color.gray.opacity(0.3) : Color.blue.opacity(0.5), lineWidth: 1)
+                                        .stroke(Color.orange.opacity(0.3), lineWidth: 1)
                                 )
-                            
-                            Text("Mô tả chi tiết về công việc bạn cần hoàn thành")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .padding(.horizontal, 4)
-                        }
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Image(systemName: "clock.fill")
-                                .foregroundColor(.orange)
-                                .font(.title3)
-                            Text("Thời gian thông báo")
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                        }
-                        
-                        HStack {
-                            DatePicker("",
-                                     selection: $selectedDate,
-                                     displayedComponents: .hourAndMinute)
-                                .datePickerStyle(CompactDatePickerStyle())
-                                .labelsHidden()
-                            
-                            Spacer()
-                            
-                            VStack(alignment: .trailing) {
-                                Text("Thời gian đã chọn")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                Text(formatTime(selectedDate))
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.orange)
                             }
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .background(Color(.systemBackground))
-                        .cornerRadius(12)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.orange.opacity(0.3), lineWidth: 1)
-                        )
-                    }
-                }
-                .padding(.horizontal, 20)
-                
-                Spacer()
-                
-                VStack(spacing: 12) {
-                    Button(action: {
-                        addSchedule()
-                    }) {
-                        HStack {
-                            Image(systemName: "plus.circle.fill")
-                            Text("Thêm Lịch Trình")
-                                .fontWeight(.semibold)
+                        .padding(.horizontal, 20)
+                        
+                        Spacer(minLength: 50)
+                        
+                        VStack(spacing: 12) {
+                            Button(action: {
+                                isTextFieldFocused = false
+                                addSchedule()
+                            }) {
+                                HStack {
+                                    Image(systemName: "plus.circle.fill")
+                                    Text("Thêm Lịch Trình")
+                                        .fontWeight(.semibold)
+                                }
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, minHeight: 50)
+                                .background(
+                                    LinearGradient(
+                                        colors: [Color.blue, Color.blue.opacity(0.8)],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                                .cornerRadius(12)
+                            }
+                            .disabled(text.isEmpty)
+                            .opacity(text.isEmpty ? 0.6 : 1.0)
+                            
+                            Button("Hủy") {
+                                isTextFieldFocused = false
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, minHeight: 44)
                         }
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(
-                            LinearGradient(
-                                colors: [Color.blue, Color.blue.opacity(0.8)],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                        .cornerRadius(12)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 20)
                     }
-                    .disabled(text.isEmpty)
-                    .opacity(text.isEmpty ? 0.6 : 1.0)
-                    
-                    Button("Hủy") {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .frame(minHeight: geometry.size.height)
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 20)
+                .scrollDismissesKeyboard(.interactively)
             }
             .navigationBarHidden(true)
             .background(Color(.systemGroupedBackground))
+            .contentShape(Rectangle())
+            .onTapGesture {
+                isTextFieldFocused = false
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Xong") {
+                        isTextFieldFocused = false
+                    }
+                }
+            }
         }
     }
     
