@@ -10,7 +10,7 @@ struct SignInView: View {
     var body: some View {
         NavigationStack {
             VStack{
-                Text("Đăng Nhập")
+                Text("Reminder")
                     .font(.system(size: 28, weight: .thin))
                     .foregroundColor(.primary)
                     .tracking(3)
@@ -24,6 +24,12 @@ struct SignInView: View {
                         .frame(height: 1)
                         .offset(y: 20)
                     )
+                
+                Spacer()
+                
+                Image("app-icon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                 
                 Spacer()
                 TextFieldView(email: $email)
