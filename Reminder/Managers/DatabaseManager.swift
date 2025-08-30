@@ -30,4 +30,17 @@ class DatabaseManager{
         ).execute().value
         return schedule
     }
+    
+    func deleteSchedule(text: String, for uid: String) async throws {
+        let response = try await supabase.from(
+            "schedules"
+        ).delete().eq(
+            "text",
+            value: text
+        ).eq(
+            "user_uid",
+            value: uid
+        ).execute()
+        print(response.status)
+    }
 }

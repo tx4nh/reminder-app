@@ -24,15 +24,14 @@ struct ScheduleView: View {
                         .padding(.horizontal, 24)
                         .padding(.vertical, 16)
                 } else {
-                    ScrollView {
-                        LazyVStack(spacing: 16) {
-                            ForEach(Array(viewModel.scheduleView.enumerated()), id: \.element.time) { index, schedule in
-                                ScheduleItemView(schedule: schedule, colorIndex: index)
-                            }
+                    List {
+                        ForEach(Array(viewModel.scheduleView.enumerated()), id: \.element.time) { index, schedule in
+                            ScheduleItemView(schedule: schedule, colorIndex: index)
                         }
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 20)
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.clear)
                     }
+                    .listStyle(.plain)
                     .refreshable {
                         do {
                             try await viewModel.fetchSchedule(for: appUser.uid)
@@ -58,6 +57,8 @@ struct ScheduleItemView: View {
     let schedule: Schedule
     let colorIndex: Int
     var index = 0
+    @State private var viewModel = ScheduleViewModel()
+    @State private var showDeleteAlert: Bool = false
 
     private let arrColors: [Color] = [
         .red, .blue, .green, .orange, .purple, .pink,
@@ -108,7 +109,7 @@ struct ScheduleItemView: View {
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(.systemBackground))
                 .shadow(
-                    color: Color.black.opacity(0.1),
+                    color: Color.black.opacity(0.3),
                     radius: 8,
                     x: 0,
                     y: 4
@@ -116,8 +117,32 @@ struct ScheduleItemView: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(timeColor.opacity(0.2), lineWidth: 1)
+                .stroke(timeColor.opacity(0.5), lineWidth: 1)
         )
+        .swipeActions(edge: .trailing) {
+            Button{
+                showDeleteAlert.toggle()
+            } label: {
+                Text("Xoá")
+                Image(systemName: "trash")
+            }
+            .tint(.red)
+            
+            Button{
+                
+            } label: {
+                Text("Sửa")
+                Image(systemName: "pencil.line")
+            }
+            .tint(.blue)
+        }
+        .alert("Xác nhận xoá", isPresented: $showDeleteAlert){
+            Button("Hủy", role: .cancel) { }
+            Button("Xóa", role: .destructive) {
+            }
+        } message: {
+            Text("Bạn có chắc muốn xoá không?")
+        }
     }
 }
 
