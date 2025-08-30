@@ -11,8 +11,8 @@ struct RegisterView: View {
     var body: some View {
         VStack{
             Text("Đăng Kí")
-                .font(.system(size: 28, weight: .thin))
-                .foregroundColor(.primary)
+                .font(.system(size: 28, weight: .semibold))
+                .foregroundColor(.blue.opacity(0.8))
                 .tracking(3)
                 .padding(.bottom, 10)
                 .overlay(
@@ -47,7 +47,7 @@ struct RegisterView: View {
                     .foregroundStyle(Color(uiColor: .systemBackground))
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color(uiColor: .label))
+                            .fill(.blue.opacity(0.9))
                     )
             }
             .padding(.top, 15)

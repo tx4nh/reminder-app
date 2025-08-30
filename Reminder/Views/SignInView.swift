@@ -11,8 +11,8 @@ struct SignInView: View {
         NavigationStack {
             VStack{
                 Text("Reminder")
-                    .font(.system(size: 28, weight: .thin))
-                    .foregroundColor(.primary)
+                    .font(.system(size: 28, weight: .semibold))
+                    .foregroundColor(.blue.opacity(0.8))
                     .tracking(3)
                     .padding(.bottom, 10)
                     .overlay(
@@ -27,7 +27,7 @@ struct SignInView: View {
                 
                 Spacer()
                 
-                Image("app-icon")
+                Image("icon-rmbg")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                 
@@ -49,10 +49,10 @@ struct SignInView: View {
                     Text("Đăng Nhập")
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .foregroundStyle(Color(uiColor: .systemBackground))
+                        .foregroundColor(.white)
                         .background(
                             RoundedRectangle(cornerRadius: 20)
-                                .fill(Color(uiColor: .label))
+                                .fill(Color.blue.opacity(0.9))
                         )
                 }
                 .padding(.top, 15)
@@ -66,11 +66,16 @@ struct SignInView: View {
                         viewModel: SignInViewModel()
                     )
                 }, label: {
-                    Text("Bạn chưa có tài khoản ?")
-                    Text("Đăng Kí")
-                        .underline()
+                    HStack(spacing: 4) {
+                        Text("Bạn chưa có tài khoản ?")
+                            .foregroundColor(.primary)
+                        Text("Đăng Kí")
+                            .foregroundColor(.blue)
+                            .underline()
+                    }
                 })
                 .padding(.top, 15)
+                
                 Spacer()
             }
             .padding()
