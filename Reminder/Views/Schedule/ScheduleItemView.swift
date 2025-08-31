@@ -1,61 +1,9 @@
 import SwiftUI
 
-struct ScheduleView: View {
-    let appUser: AppUser
-    @State private var viewModel = ScheduleViewModel()
-    
-    var body: some View {
-        NavigationView {
-            ZStack {
-                LinearGradient(
-                    colors: [
-                        Color(.systemGroupedBackground),
-                        Color(.systemGray6).opacity(0.3)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-                
-                if viewModel.scheduleView.isEmpty {
-                    Text("Chưa có lịch trình nào được thêm")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 16)
-                } else {
-                    List {
-                        ForEach(Array(viewModel.scheduleView.enumerated()), id: \.element.time) { index, schedule in
-                            ScheduleItemView(schedule: schedule, colorIndex: index)
-                        }
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                    }
-                    .listStyle(.plain)
-                    .refreshable {
-                        do {
-                            try await viewModel.fetchSchedule(for: appUser.uid)
-                        } catch {
-                            print("DEBUG: Failed to refresh schedule: \(error)")
-                        }
-                    }
-                }
-            }
-            .navigationBarHidden(true)
-        }
-        .task {
-            do{
-                try await viewModel.fetchSchedule(for: appUser.uid)
-            } catch{
-                print("Error fetch")
-            }
-        }
-    }
-}
-
 struct ScheduleItemView: View {
     let schedule: Schedule
     let colorIndex: Int
+    let appUser: AppUser
     var index = 0
     @State private var viewModel = ScheduleViewModel()
     @State private var showDeleteAlert: Bool = false
@@ -139,6 +87,13 @@ struct ScheduleItemView: View {
         .alert("Xác nhận xoá", isPresented: $showDeleteAlert){
             Button("Hủy", role: .cancel) { }
             Button("Xóa", role: .destructive) {
+                Task{
+                    do{
+                        try await viewModel.deleteSchedule(text: schedule.text, for: appUser.uid)
+                    } catch {
+                        print("Error Delete")
+                    }
+                }
             }
         } message: {
             Text("Bạn có chắc muốn xoá không?")
@@ -147,6 +102,5 @@ struct ScheduleItemView: View {
 }
 
 #Preview {
-    ScheduleView(appUser: AppUser(uid: "2311", email: "atdevv@gmail.com"))
+    ScheduleItemView(schedule: Schedule(user_uid: "2311", text: "Game", time: "12:00"), colorIndex: 0, appUser: AppUser(uid: "2311", email: "atd@gmail.com"))
 }
-

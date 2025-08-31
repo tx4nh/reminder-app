@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct ReminderAppView: View {
     @State private var appUser: AppUser? = nil
     @State private var isLoading: Bool = false
     
@@ -42,5 +42,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ReminderAppView()
 }
