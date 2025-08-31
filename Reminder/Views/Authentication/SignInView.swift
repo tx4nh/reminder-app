@@ -33,6 +33,7 @@ struct SignInView: View {
                 
                 Spacer()
                 TextFieldView(email: $email)
+                    .padding(.bottom, 10)
                 SecureFieldView(password: $password)
                 
                 Button {

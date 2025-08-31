@@ -10,7 +10,7 @@ struct RegisterView: View {
     
     var body: some View {
         VStack{
-            Text("Đăng Kí")
+            Text("Tạo tài khoản")
                 .font(.system(size: 28, weight: .semibold))
                 .foregroundColor(.blue.opacity(0.8))
                 .tracking(3)
@@ -27,6 +27,7 @@ struct RegisterView: View {
                 
             Spacer()
             TextFieldView(email: $email)
+                .padding(.bottom, 10)
             SecureFieldView(password: $password)
             
             Button {
