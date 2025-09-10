@@ -32,10 +32,6 @@ struct SettingView: View {
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .foregroundColor(.primary)
-                                
-                                Text("Quản lý tài khoản và cài đặt")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
                             }
                         }
                         Spacer()

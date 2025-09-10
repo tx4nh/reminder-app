@@ -35,17 +35,17 @@ struct SettingRowView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(iconColor.opacity(0.1))
-                                .frame(width: 40, height: 40)
+                                .frame(width: 38, height: 38)
                             
                             Image(systemName: icon)
-                                .font(.system(size: 20, weight: .medium))
+                                .font(.system(size: 18, weight: .medium))
                                 .foregroundColor(iconColor)
                         }
                     }.padding(.leading, -20)
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text(title)
-                            .font(.system(size: 17, weight: .medium))
+                            .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.primary)
                         
                         if let subtitle = subtitle {
@@ -59,7 +59,7 @@ struct SettingRowView: View {
                     
                     HStack{
                         Image(systemName: "chevron.right")
-                            .font(.system(size: 16, weight: .medium))
+                            .font(.system(size: 15, weight: .medium))
                             .foregroundColor(.secondary)
                     }
                     .padding(.trailing, -40)
