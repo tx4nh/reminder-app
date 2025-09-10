@@ -4,13 +4,6 @@ import Foundation
 @Observable
 class ScheduleViewModel{
     var scheduleView: [Schedule] = [
-        .init(user_uid: "2311", text: "Di ngu", time: "19:00"),
-        .init(user_uid: "2311", text: "Di ngu", time: "20:00"),
-        .init(user_uid: "2311", text: "Di ngu", time: "21:00"),
-        .init(user_uid: "2311", text: "Di ngu", time: "22:00"),
-        .init(user_uid: "2311", text: "Di ngu", time: "23:00"),
-        .init(user_uid: "2311", text: "Di ngu", time: "24:00"),
-        .init(user_uid: "2311", text: "Di ngu", time: "25:00"),
     ]
     
     func insertSchedule(user_uid: String, text: String, time: String) async throws {
