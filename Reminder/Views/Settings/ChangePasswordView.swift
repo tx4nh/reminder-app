@@ -19,7 +19,7 @@ struct ChangePasswordView: View {
                             .font(.system(size: 40))
                             .foregroundColor(.accentColor)
                         
-                        Text("Đổi mật khẩu")
+                        Text("change_password")
                             .font(.title2)
                             .fontWeight(.bold)
                         
@@ -34,7 +34,7 @@ struct ChangePasswordView: View {
                     VStack(spacing: 16) {
                         // Current Password
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Mật khẩu hiện tại")
+                            Text("current_password")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(.secondary)
                             
@@ -43,7 +43,7 @@ struct ChangePasswordView: View {
                         
                         // New Password
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Mật khẩu mới")
+                            Text("new_password")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(.secondary)
                             
@@ -52,7 +52,7 @@ struct ChangePasswordView: View {
                         
                         // Confirm Password
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Xác nhận mật khẩu mới")
+                            Text("confirm_new_password")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(.secondary)
                             
@@ -85,7 +85,7 @@ struct ChangePasswordView: View {
                                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                     .scaleEffect(0.8)
                             }
-                            Text(isLoading ? "Đang cập nhật..." : "Đổi mật khẩu")
+                            Text(isLoading ? "Đang cập nhật..." : "change_password")
                                 .font(.system(size: 16, weight: .semibold))
                         }
                     }
@@ -100,18 +100,18 @@ struct ChangePasswordView: View {
                 }
                 .padding(.horizontal, 20)
             }
-            .navigationTitle("Đổi mật khẩu")
+            .navigationTitle("change_password")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Hủy") {
+                    Button("delete_text") {
                         dismiss()
                     }
                 }
             }
         }
-        .alert("Thông báo", isPresented: $showAlert) {
+        .alert("notification_text", isPresented: $showAlert) {
             Button("OK") { }
         } message: {
             Text(alertMessage)

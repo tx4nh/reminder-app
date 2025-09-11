@@ -19,11 +19,15 @@ struct AboutView: View {
                         }
                         
                         VStack(spacing: 8) {
-                            Text("Reminder App")
+                            Text("app_name")
                                 .font(.title)
                                 .fontWeight(.bold)
                             
-                            Text("Phiên bản 1.0.0")
+                            Text(" App")
+                                .font(.title)
+                                .fontWeight(.bold)
+                            
+                            Text("version_app")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                             
@@ -36,11 +40,11 @@ struct AboutView: View {
                     .padding(.top, 20)
                     
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Về ứng dụng")
+                        Text("about_app")
                             .font(.headline)
                             .fontWeight(.semibold)
                         
-                        Text("Reminder App giúp bạn quản lý lịch hẹn và công việc một cách hiệu quả. Với giao diện thân thiện và tính năng thông báo thông minh, bạn sẽ không bao giờ bỏ lỡ những cuộc hẹn quan trọng.")
+                        Text("overview_app")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .lineSpacing(4)
@@ -108,14 +112,14 @@ struct AboutView: View {
                         Divider()
                         
                         HStack(spacing: 20) {
-                            Button("Điều khoản sử dụng") {
+                            Button("terms_of_use") {
                                 // TODO: Open terms of service
                                 print("Terms tapped")
                             }
                             .font(.caption)
                             .foregroundColor(.accentColor)
                             
-                            Button("Chính sách bảo mật") {
+                            Button("privacy_policy") {
                                 // TODO: Open privacy policy
                                 print("Privacy tapped")
                             }
@@ -133,12 +137,12 @@ struct AboutView: View {
                 }
                 .padding(.horizontal, 20)
             }
-            .navigationTitle("Về ứng dụng")
+            .navigationTitle("about_app")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Đóng") {
+                    Button("cancel_button") {
                         dismiss()
                     }
                 }

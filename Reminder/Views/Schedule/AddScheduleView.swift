@@ -17,7 +17,8 @@ struct AddScheduleView: View {
                                 .font(.system(size: 48))
                                 .foregroundColor(.blue)
                             
-                            Text("Thêm Lịch Trình Mới")
+                            Text("add_new_schedule")
+                                .textInputAutocapitalization(.words)
                                 .font(.title2)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.primary)
@@ -30,14 +31,14 @@ struct AddScheduleView: View {
                                     Image(systemName: "text.document")
                                         .foregroundColor(.blue)
                                         .font(.title3)
-                                    Text("Nội dung công việc")
+                                    Text("job_content")
                                         .font(.title3)
                                         .fontWeight(.medium)
                                         .foregroundColor(.primary)
                                 }
                                 
                                 VStack(alignment: .leading, spacing: 6) {
-                                    TextField("Nhập việc cần làm hôm nay...", text: $text, axis: .vertical)
+                                    TextField("enter_to_day_to_do_list", text: $text, axis: .vertical)
                                         .focused($isTextFieldFocused)
                                         .frame(minHeight: 100, alignment: .topLeading)
                                         .textFieldStyle(PlainTextFieldStyle())
@@ -51,7 +52,7 @@ struct AddScheduleView: View {
                                                 .stroke(text.isEmpty ? Color.gray.opacity(0.3) : Color.blue.opacity(0.5), lineWidth: 1)
                                         )
                                     
-                                    Text("Mô tả chi tiết về công việc bạn cần hoàn thành")
+                                    Text("des_detail_job")
                                         .font(.caption)
                                         .foregroundColor(.secondary)
                                         .padding(.horizontal, 4)
@@ -63,7 +64,7 @@ struct AddScheduleView: View {
                                     Image(systemName: "clock.fill")
                                         .foregroundColor(.orange)
                                         .font(.title3)
-                                    Text("Thời gian thông báo")
+                                    Text("notification_time")
                                         .font(.headline)
                                         .foregroundColor(.primary)
                                 }
@@ -78,7 +79,7 @@ struct AddScheduleView: View {
                                     Spacer()
                                     
                                     VStack(alignment: .trailing) {
-                                        Text("Thời gian đã chọn")
+                                        Text("selected_time")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
                                         Text(formatTime(selectedDate))
@@ -108,7 +109,7 @@ struct AddScheduleView: View {
                             }) {
                                 HStack {
                                     Image(systemName: "plus.circle.fill")
-                                    Text("Thêm Lịch Trình")
+                                    Text("add_schedule")
                                         .fontWeight(.semibold)
                                 }
                                 .foregroundColor(.white)
@@ -125,7 +126,7 @@ struct AddScheduleView: View {
                             .disabled(text.isEmpty)
                             .opacity(text.isEmpty ? 0.6 : 1.0)
                             
-                            Button("Hủy") {
+                            Button("cancel_text") {
                                 isTextFieldFocused = false
                                 presentationMode.wrappedValue.dismiss()
                             }
@@ -148,7 +149,7 @@ struct AddScheduleView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
-                    Button("Xong") {
+                    Button("done_text") {
                         isTextFieldFocused = false
                     }
                 }

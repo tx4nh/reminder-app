@@ -10,7 +10,7 @@ struct RegisterView: View {
     
     var body: some View {
         VStack{
-            Text("Tạo tài khoản")
+            Text("create_account")
                 .font(.system(size: 28, weight: .semibold))
                 .foregroundColor(.blue.opacity(0.8))
                 .tracking(3)
@@ -42,7 +42,7 @@ struct RegisterView: View {
                     }
                 }
             } label: {
-                Text("Đăng Kí")
+                Text("register_text")
                     .padding()
                     .frame(maxWidth: .infinity)
                     .foregroundStyle(Color(uiColor: .systemBackground))

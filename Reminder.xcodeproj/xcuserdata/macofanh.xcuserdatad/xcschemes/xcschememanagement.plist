@@ -6,8 +6,35 @@
 	<dict>
 		<key>Reminder.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>Reminder_en.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>28553C312E444286006C1EF3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28553C3E2E444288006C1EF3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>28553C482E444288006C1EF3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

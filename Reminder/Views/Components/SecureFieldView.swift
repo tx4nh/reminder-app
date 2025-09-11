@@ -16,10 +16,10 @@ struct SecureFieldView: View {
             
             Group {
                 if isPasswordVisible {
-                    TextField("Password", text: $password)
+                    TextField("password_text", text: $password)
                         .focused($isFocused)
                 } else {
-                    SecureField("Password", text: $password)
+                    SecureField("password_text", text: $password)
                         .focused($isFocused)
                 }
             }

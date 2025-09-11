@@ -10,7 +10,7 @@ struct SignInView: View {
     var body: some View {
         NavigationStack {
             VStack{
-                Text("Reminder")
+                Text("app_name")
                     .font(.system(size: 28, weight: .semibold))
                     .foregroundColor(.blue.opacity(0.8))
                     .tracking(3)
@@ -41,13 +41,13 @@ struct SignInView: View {
                         do{
                             let user = try await viewModel.signInWithEmail(email: email, password: password)
                             self.appUser = user
-                            print("Success signin")
+                            print("success_signin")
                         } catch{
-                            print("Error")
+                            print("error")
                         }
                     }
                 } label: {
-                    Text("Đăng Nhập")
+                    Text("sign_in_text")
                         .padding()
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.white)
@@ -68,9 +68,9 @@ struct SignInView: View {
                     )
                 }, label: {
                     HStack(spacing: 4) {
-                        Text("Bạn chưa có tài khoản ?")
+                        Text("you_no_account")
                             .foregroundColor(.primary)
-                        Text("Đăng Kí")
+                        Text("register_text")
                             .foregroundColor(.blue)
                             .underline()
                     }

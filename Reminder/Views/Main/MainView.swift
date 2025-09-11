@@ -19,7 +19,7 @@ struct MainView: View {
                                 )
                             )
                         
-                        Text("Lịch trình hôm nay")
+                        Text("today_schedule")
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundStyle(
@@ -56,12 +56,12 @@ struct MainView: View {
                                 )
                             
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Thêm lịch trình mới")
+                                Text("add_new_schedule")
                                     .font(.headline)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.primary)
                                 
-                                Text("Để nhận thông báo")
+                                Text("to_receive_notifications")
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
                             }

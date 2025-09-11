@@ -71,7 +71,7 @@ struct ScheduleItemView: View {
             Button{
                 showDeleteAlert.toggle()
             } label: {
-                Text("Xoá")
+                Text("delete_text")
                 Image(systemName: "trash")
             }
             .tint(.red)
@@ -79,14 +79,14 @@ struct ScheduleItemView: View {
             Button{
                 
             } label: {
-                Text("Sửa")
+                Text("modify_text")
                 Image(systemName: "pencil.line")
             }
             .tint(.blue)
         }
-        .alert("Xác nhận xoá", isPresented: $showDeleteAlert){
-            Button("Hủy", role: .cancel) { }
-            Button("Xóa", role: .destructive) {
+        .alert("confirm_delete", isPresented: $showDeleteAlert){
+            Button("cancel_text", role: .cancel) { }
+            Button("delete_text", role: .destructive) {
                 Task{
                     do{
                         try await viewModel.deleteSchedule(text: schedule.text, for: appUser.uid)
@@ -96,7 +96,7 @@ struct ScheduleItemView: View {
                 }
             }
         } message: {
-            Text("Bạn có chắc muốn xoá không?")
+            Text("are_you_sure_delete")
         }
     }
 }

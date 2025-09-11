@@ -12,7 +12,7 @@ struct TextFieldView: View {
                 .font(.system(size: 16, weight: .medium))
                 .animation(.easeInOut(duration: 0.2), value: isFocused)
             
-            TextField("Email", text: $email)
+            TextField("email_text", text: $email)
                 .focused($isFocused)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()

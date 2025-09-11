@@ -18,7 +18,7 @@ struct ScheduleView: View {
                 .ignoresSafeArea()
                 
                 if viewModel.scheduleView.isEmpty {
-                    Text("Chưa có lịch trình nào được thêm")
+                    Text("no_schedule_added")
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.secondary)
                         .padding(.horizontal, 24)

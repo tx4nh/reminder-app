@@ -24,7 +24,7 @@ struct NotificationSettingsView: View {
                             .font(.system(size: 40))
                             .foregroundColor(.orange)
                         
-                        Text("Cài đặt thông báo")
+                        Text("notification_text")
                             .font(.title2)
                             .fontWeight(.bold)
                         
@@ -145,18 +145,18 @@ struct NotificationSettingsView: View {
                 }
                 .padding(.horizontal, 20)
             }
-            .navigationTitle("Thông báo")
+            .navigationTitle("notification_text")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Quay lại") {
+                    Button("comeback_text") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Lưu") {
+                    Button("save_text") {
                         saveSettings()
                     }
                     .fontWeight(.semibold)
@@ -225,17 +225,17 @@ struct SoundPickerView: View {
                     }
                 }
             }
-            .navigationTitle("Âm thanh")
+            .navigationTitle("sound_text")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Hủy") {
+                    Button("cancel_text") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Chọn") {
+                    Button("select_text") {
                         selectedSound = tempSelection
                         dismiss()
                     }

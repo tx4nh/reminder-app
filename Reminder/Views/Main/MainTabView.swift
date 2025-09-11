@@ -6,11 +6,15 @@ struct MainTabView: View {
     
     var body: some View {
         TabView{
-            Tab("Trang Chủ", systemImage: "house.fill") {
+            Tab("home_page_text", systemImage: "house.fill") {
                     MainView(appUser: appUser)
             }
             
-            Tab("Cài Đặt", systemImage: "gearshape.fill") {
+            Tab("event_text", systemImage: "calendar.badge.plus"){
+                Text("add_event")
+            }
+            
+            Tab("setting_text", systemImage: "gearshape.fill") {
                 SettingView (onSignOut: {
                         onSignOut()
                 })

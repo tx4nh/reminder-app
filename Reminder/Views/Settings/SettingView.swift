@@ -11,7 +11,7 @@ struct SettingView: View {
     @State private var autoBackupEnabled = true
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     HStack {
@@ -28,7 +28,7 @@ struct SettingView: View {
                             }
                         
                             VStack(spacing: 4) {
-                                Text("Xin chào!")
+                                Text("hello_text")
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .foregroundColor(.primary)
@@ -42,38 +42,47 @@ struct SettingView: View {
                 .listRowBackground(Color.clear)
                 
                 Section {
-                    SettingRowView(
-                        icon: "person.crop.circle",
-                        title: "Thông tin cá nhân",
-                        subtitle: "Cập nhật hồ sơ và thông tin",
-                        iconColor: .blue
-                    ) {
-                        showProfileSettings = true
+                    NavigationLink {
+                        ProfileSettingsView()
+                            .navigationBarBackButtonHidden()
+                    } label: {
+                        SettingRowView(
+                            icon: "person.crop.circle",
+                            title: "Thông tin cá nhân",
+                            subtitle: "Cập nhật hồ sơ và thông tin",
+                            iconColor: .blue
+                        )
                     }
-                
-                    SettingRowView(
-                        icon: "key",
-                        title: "Đổi mật khẩu",
-                        subtitle: "Cập nhật mật khẩu bảo mật",
-                        iconColor: .green
-                    ) {
-                        showChangePassword = true
+
+                    NavigationLink {
+                        ChangePasswordView()
+                            .navigationBarBackButtonHidden()
+                    } label: {
+                        SettingRowView(
+                            icon: "key",
+                            title: "Đổi mật khẩu",
+                            subtitle: "Cập nhật mật khẩu bảo mật",
+                            iconColor: .green
+                        )
                     }
                 } header: {
-                    Text("Tài khoản")
+                    Text("account_text")
                 }
                 
                 Section {
-                    SettingRowView(
-                        icon: "bell",
-                        title: "Cài đặt thông báo",
-                        subtitle: "Âm thanh, rung và nhắc nhở",
-                        iconColor: .orange
-                    ) {
-                        showNotificationSettings = true
+                    NavigationLink{
+                        NotificationSettingsView()
+                            .navigationBarBackButtonHidden()
+                    } label: {
+                        SettingRowView(
+                            icon: "bell",
+                            title: "Cài đặt thông báo",
+                            subtitle: "Âm thanh, rung và nhắc nhở",
+                            iconColor: .orange
+                        )
                     }
                 } header: {
-                    Text("Thông báo")
+                    Text("notification_text")
                 }
                 
                 Section {
@@ -84,16 +93,18 @@ struct SettingView: View {
                         iconColor: .indigo,
                         isOn: $darkModeEnabled
                     )
-                    
-                    SettingRowView(
-                        icon: "globe",
-                        title: "Ngôn ngữ",
-                        subtitle: "Thay đổi ngôn ngữ ứng dụng",
-                        iconColor: .purple,
-                    ) {
-                        showLanguageSettings = true
+
+                    NavigationLink{
+//                        LanguageSettingView()
+                    } label: {
+                        SettingRowView(
+                            icon: "globe",
+                            title: "Ngôn ngữ",
+                            subtitle: "Thay đổi ngôn ngữ ứng dụng",
+                            iconColor: .purple,
+                        )
                     }
-                    
+
                     ToggleRowView(
                         icon: "icloud.and.arrow.up",
                         title: "Sao lưu tự động",
@@ -102,40 +113,45 @@ struct SettingView: View {
                         isOn: $autoBackupEnabled
                     )
                 } header: {
-                    Text("Ứng dụng")
+                    Text("app_text")
                 }
                 
                 Section {
-                    SettingRowView(
-                        icon: "questionmark.circle",
-                        title: "Trợ giúp",
-                        subtitle: "Câu hỏi thường gặp và hướng dẫn",
-                        iconColor: .teal
-                    ) {
-                        // TODO: Show help view
-                        print("Help tapped")
+                    NavigationLink{
+                        
+                    } label: {
+                        SettingRowView(
+                            icon: "questionmark.circle",
+                            title: "Trợ giúp",
+                            subtitle: "Câu hỏi thường gặp và hướng dẫn",
+                            iconColor: .teal
+                        )
+                    }
+
+                    NavigationLink{
+                        AboutView()
+                            .navigationBarBackButtonHidden()
+                    } label: {
+                        SettingRowView(
+                            icon: "info.circle",
+                            title: "Về ứng dụng",
+                            subtitle: "Phiên bản và thông tin",
+                            iconColor: .gray
+                        )
                     }
                     
-                    SettingRowView(
-                        icon: "info.circle",
-                        title: "Về ứng dụng",
-                        subtitle: "Phiên bản và thông tin",
-                        iconColor: .gray
-                    ) {
-                        showAbout = true
-                    }
-                    
-                    SettingRowView(
-                        icon: "star",
-                        title: "Đánh giá ứng dụng",
-                        subtitle: "Chia sẻ trải nghiệm của bạn",
-                        iconColor: .yellow
-                    ) {
-                        // TODO: Open App Store rating
-                        print("Rate app tapped")
+                    NavigationLink{
+                        
+                    } label: {
+                        SettingRowView(
+                            icon: "star",
+                            title: "Đánh giá ứng dụng",
+                            subtitle: "Chia sẻ trải nghiệm của bạn",
+                            iconColor: .yellow
+                        )
                     }
                 } header: {
-                    Text("Hỗ trợ")
+                    Text("support_text")
                 }
                 
                 VStack(spacing: 16) {
@@ -145,7 +161,7 @@ struct SettingView: View {
                         HStack(spacing: 8) {
                             Image(systemName: "rectangle.portrait.and.arrow.right")
                                 .font(.system(size: 16, weight: .medium))
-                            Text("Đăng xuất")
+                            Text("sign_out_text")
                                 .font(.system(size: 16, weight: .medium))
                         }
                     }
@@ -161,20 +177,8 @@ struct SettingView: View {
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
             }
-            .navigationTitle("Cài đặt")
+            .navigationTitle("setting_text")
             .navigationBarTitleDisplayMode(.automatic)
-        }
-        .sheet(isPresented: $showChangePassword) {
-            ChangePasswordView()
-        }
-        .sheet(isPresented: $showNotificationSettings) {
-            NotificationSettingsView()
-        }
-        .sheet(isPresented: $showProfileSettings) {
-            ProfileSettingsView()
-        }
-        .sheet(isPresented: $showAbout) {
-            AboutView()
         }
     }
 }

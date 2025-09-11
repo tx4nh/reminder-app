@@ -57,35 +57,33 @@ struct ProfileSettingsView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                         
-                        Text("Thông tin cá nhân")
+                        Text("personal_information")
                             .font(.title2)
                             .fontWeight(.bold)
                         
-                        Text("Cập nhật thông tin tài khoản của bạn")
+                        Text("update_your_account_information")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
                     }
                     .padding(.top, 20)
                     
-                    // Form
                     VStack(spacing: 16) {
-                        // Display Name
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Tên hiển thị")
+                            Text("display_name")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(.secondary)
                             
                             CustomTextFieldView(
                                 icon: "person",
-                                placeholder: "Nhập tên hiển thị",
+                                placeholder: "enter_display_name",
                                 text: $displayName
                             )
                         }
                         
                         // Email (Read-only)
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Email")
+                            Text("email_text")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(.secondary)
                             
@@ -100,7 +98,7 @@ struct ProfileSettingsView: View {
                                 
                                 Spacer()
                                 
-                                Text("Chỉ đọc")
+                                Text("read_only")
                                     .font(.system(size: 12))
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 4)
@@ -122,7 +120,7 @@ struct ProfileSettingsView: View {
                         
                         // Phone Number
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Số điện thoại")
+                            Text("phone_number")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(.secondary)
                             
@@ -136,7 +134,7 @@ struct ProfileSettingsView: View {
                     
                     // Account Info Section
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Thông tin tài khoản")
+                        Text("account_information")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.primary)
                             .padding(.horizontal, 4)
@@ -190,12 +188,12 @@ struct ProfileSettingsView: View {
                 }
                 .padding(.horizontal, 20)
             }
-            .navigationTitle("Hồ sơ")
+            .navigationTitle("personal_profile")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Quay lại") {
+                    Button("comeback_text") {
                         dismiss()
                     }
                 }
@@ -204,7 +202,7 @@ struct ProfileSettingsView: View {
         .sheet(isPresented: $showAvatarPicker) {
             AvatarPickerView(selectedAvatar: $selectedAvatar)
         }
-        .alert("Thông báo", isPresented: $showAlert) {
+        .alert("notification_text", isPresented: $showAlert) {
             Button("OK") { }
         } message: {
             Text(alertMessage)
@@ -369,17 +367,17 @@ struct AvatarPickerView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Chọn avatar")
+            .navigationTitle("select_avatar")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Hủy") {
+                    Button("cancel_text") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Chọn") {
+                    Button("select_text") {
                         selectedAvatar = tempSelection
                         dismiss()
                     }
