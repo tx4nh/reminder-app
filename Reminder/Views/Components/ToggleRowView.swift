@@ -49,11 +49,7 @@ struct ToggleRowView: View {
                 .padding(.trailing, -20)
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 12)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.systemBackground))
-        )
+        .contentShape(Rectangle())
     }
 }
 

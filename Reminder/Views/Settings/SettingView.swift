@@ -40,7 +40,7 @@ struct SettingView: View {
                 }
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
-                
+            
                 Section {
                     NavigationLink {
                         ProfileSettingsView()
@@ -53,6 +53,7 @@ struct SettingView: View {
                             iconColor: .blue
                         )
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
 
                     NavigationLink {
                         ChangePasswordView()
@@ -65,6 +66,7 @@ struct SettingView: View {
                             iconColor: .green
                         )
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 } header: {
                     Text("account_text")
                 }
@@ -81,6 +83,7 @@ struct SettingView: View {
                             iconColor: .orange
                         )
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 } header: {
                     Text("notification_text")
                 }
@@ -95,7 +98,7 @@ struct SettingView: View {
                     )
 
                     NavigationLink{
-//                        LanguageSettingView()
+                        LanguageSettingView()
                     } label: {
                         SettingRowView(
                             icon: "globe",
@@ -104,14 +107,7 @@ struct SettingView: View {
                             iconColor: .purple,
                         )
                     }
-
-                    ToggleRowView(
-                        icon: "icloud.and.arrow.up",
-                        title: "Sao lưu tự động",
-                        subtitle: "Tự động sao lưu dữ liệu",
-                        iconColor: .cyan,
-                        isOn: $autoBackupEnabled
-                    )
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 } header: {
                     Text("app_text")
                 }
@@ -127,6 +123,7 @@ struct SettingView: View {
                             iconColor: .teal
                         )
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
 
                     NavigationLink{
                         AboutView()
@@ -139,6 +136,7 @@ struct SettingView: View {
                             iconColor: .gray
                         )
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     
                     NavigationLink{
                         
@@ -150,6 +148,7 @@ struct SettingView: View {
                             iconColor: .yellow
                         )
                     }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 } header: {
                     Text("support_text")
                 }
