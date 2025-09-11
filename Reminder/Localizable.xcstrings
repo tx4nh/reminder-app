@@ -440,6 +440,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "home_page_text" : {
       "localizations" : {
         "en" : {

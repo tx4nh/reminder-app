@@ -2,15 +2,10 @@ import SwiftUI
 
 struct SettingView: View {
     let onSignOut: () -> Void
-    @State private var showChangePassword = false
-    @State private var showNotificationSettings = false
-    @State private var showProfileSettings = false
-    @State private var showLanguageSettings = false
-    @State private var showAbout = false
-    @State private var darkModeEnabled = false
-    @State private var autoBackupEnabled = true
-    
+    @Environment(ThemeViewModel.self) private var themeViewModel
+
     var body: some View {
+        @Bindable var themeViewModel = themeViewModel
         NavigationStack {
             Form {
                 Section {
@@ -40,7 +35,7 @@ struct SettingView: View {
                 }
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
-            
+
                 Section {
                     NavigationLink {
                         ProfileSettingsView()
@@ -94,7 +89,7 @@ struct SettingView: View {
                         title: "Chế độ tối",
                         subtitle: "Giao diện tối cho mắt",
                         iconColor: .indigo,
-                        isOn: $darkModeEnabled
+                        isOn: $themeViewModel.isDarkMode
                     )
 
                     NavigationLink{
