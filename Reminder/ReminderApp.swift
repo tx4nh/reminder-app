@@ -8,7 +8,7 @@ struct ReminderApp: App {
         WindowGroup {
             ReminderAppView()
                 .environment(themeViewModel)
-                .environment(\.colorScheme, themeViewModel.isDarkMode ? .dark : .light)
+                .preferredColorScheme(themeViewModel.isDarkMode ? .dark : .light)
         }
     }
 }
