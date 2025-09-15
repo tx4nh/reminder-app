@@ -16,7 +16,8 @@ struct CustomTextFieldView: View {
             
             TextField(placeholder, text: $text)
                 .focused($isFocused)
-                .textInputAutocapitalization(.words)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)

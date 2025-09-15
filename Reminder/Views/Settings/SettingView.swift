@@ -5,6 +5,7 @@ struct SettingView: View {
     let onSignOut: () -> Void
     @Environment(ThemeViewModel.self) private var themeViewModel
     @Environment(AppLanguageManager.self) private var appLanguage
+    @Environment(UserNameViewModel.self) private var userName
 
     var body: some View {
         @Bindable var themeViewModel = themeViewModel
@@ -29,6 +30,10 @@ struct SettingView: View {
                                     .font(.title2)
                                     .fontWeight(.bold)
                                     .foregroundColor(.primary)
+                                Text(userName.name)
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.primary)
                             }
                         }
                         Spacer()
@@ -40,13 +45,13 @@ struct SettingView: View {
 
                 Section {
                     NavigationLink {
-                        ProfileSettingsView(appUser: appUser)
+                        ProfileSettingsView(appUser: appUser, userName: userName)
                             .navigationBarBackButtonHidden()
                     } label: {
                         SettingRowView(
                             icon: "person.crop.circle",
-                            title: "Thông tin cá nhân",
-                            subtitle: "Cập nhật hồ sơ và thông tin",
+                            title: "personal_information",
+                            subtitle: "update_profile",
                             iconColor: .blue
                         )
                     }
@@ -58,8 +63,8 @@ struct SettingView: View {
                     } label: {
                         SettingRowView(
                             icon: "key",
-                            title: "Đổi mật khẩu",
-                            subtitle: "Cập nhật mật khẩu bảo mật",
+                            title: "change_password",
+                            subtitle: "update_security_password",
                             iconColor: .green
                         )
                     }

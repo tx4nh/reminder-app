@@ -326,12 +326,15 @@
     "Đang cập nhật..." : {
 
     },
-    "Đang lưu..." : {
-
-    },
     "dark_interface_for_eye" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark interface for eye"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -343,6 +346,12 @@
     "dark_mode" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark mode"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -510,6 +519,9 @@
           }
         }
       }
+    },
+    "Key" : {
+      "extractionState" : "manual"
     },
     "language_text" : {
       "localizations" : {
@@ -690,23 +702,6 @@
         }
       }
     },
-    "phone_number" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Phone number"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Số điện thoại"
-          }
-        }
-      }
-    },
     "privacy_policy" : {
       "localizations" : {
         "en" : {
@@ -875,6 +870,12 @@
     },
     "sound_text" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -965,18 +966,36 @@
     "Ứng dụng quản lý lịch hẹn thông minh" : {
 
     },
-    "update_your_account_information" : {
+    "update_profile" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Update your account infomation"
+            "value" : "Update profile"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cập nhật thông tin của bạn"
+            "value" : "Cập nhật hồ sơ"
+          }
+        }
+      }
+    },
+    "update_security_password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update security password"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cập nhật mật khẩu bảo mật"
           }
         }
       }

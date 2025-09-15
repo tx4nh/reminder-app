@@ -3,13 +3,12 @@ import SwiftUI
 struct ProfileSettingsView: View {
     let appUser: AppUser
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppLanguageManager.self) var appSetting
+    @Bindable var userName: UserNameViewModel
+
     @State private var displayName = ""
     @State private var email = ""
-    @State private var phoneNumber = ""
     @State private var selectedAvatar = "person.circle.fill"
-    @State private var isLoading = false
-    @State private var showAlert = false
-    @State private var alertMessage = ""
     @State private var showAvatarPicker = false
     
     let avatarOptions = [
@@ -26,7 +25,7 @@ struct ProfileSettingsView: View {
        let dateFormatter = DateFormatter()
        dateFormatter.dateStyle = .long
        dateFormatter.timeStyle = .short
-       dateFormatter.locale = Locale(identifier: "vi_VN")
+        dateFormatter.locale = Locale(identifier: appSetting.language.id)
         return dateFormatter.string(from: currentDate).capitalized
    }
     
@@ -80,7 +79,7 @@ struct ProfileSettingsView: View {
                             CustomTextFieldView(
                                 icon: "person",
                                 placeholder: "enter_display_name",
-                                text: $displayName
+                                text: $userName.name
                             )
                         }
                         
@@ -148,12 +147,7 @@ struct ProfileSettingsView: View {
                     
                     Button(action: saveProfile) {
                         HStack {
-                            if isLoading {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                    .scaleEffect(0.8)
-                            }
-                            Text(isLoading ? "Đang lưu..." : "Lưu thay đổi")
+                            Text("Lưu thay đổi")
                                 .font(.system(size: 16, weight: .semibold))
                         }
                     }
@@ -164,7 +158,6 @@ struct ProfileSettingsView: View {
                             .fill(Color.accentColor)
                     )
                     .foregroundColor(.white)
-                    .disabled(isLoading)
                 }
                 .padding(.horizontal, 20)
             }
@@ -182,31 +175,21 @@ struct ProfileSettingsView: View {
         .sheet(isPresented: $showAvatarPicker) {
             AvatarPickerView(selectedAvatar: $selectedAvatar)
         }
-        .alert("notification_text", isPresented: $showAlert) {
-            Button("OK") { }
-        } message: {
-            Text(alertMessage)
-        }
         .onAppear {
             loadUserData()
         }
     }
     
     private func loadUserData() {
-        displayName = "Người dùng"
         email = appUser.email ?? "Email"
     }
     
     private func saveProfile() {
-        isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            isLoading = false
-            alertMessage = "Thông tin đã được cập nhật thành công!"
-            showAlert = true
-        }
+        UserDefaults.standard.set(userName.name, forKey: "username")
+        dismiss()
     }
 }
 
 #Preview {
-    ProfileSettingsView(appUser: .init(uid: "2311", email: "anhhihi@gmai.com"))
+    ProfileSettingsView(appUser: .init(uid: "2311", email: "anhhihi@gmai.com"), userName: UserNameViewModel())
 }
