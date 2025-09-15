@@ -11,139 +11,113 @@ struct NotificationSettingsView: View {
     @State private var reminderBefore1Day = false
     @State private var selectedSound = "Mặc định"
     @State private var showSoundPicker = false
+    @State private var isPressed = false
     
     let soundOptions = ["Mặc định", "Chuông", "Báo thức", "Nhẹ nhàng", "Sôi động", "Tắt"]
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 20) {
-                    // Header
-                    VStack(spacing: 8) {
-                        Image(systemName: "bell.fill")
-                            .font(.system(size: 40))
-                            .foregroundColor(.orange)
-                        
-                        Text("notification_text")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        
-                        Text("Tùy chỉnh cách bạn nhận thông báo")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    .padding(.top, 20)
+            Form {
+                Section {
+                    ToggleRowView(
+                        icon: "bell.badge",
+                        title: "Thông báo đẩy",
+                        subtitle: "Nhận thông báo khi có lịch hẹn",
+                        iconColor: .red,
+                        isOn: $pushNotificationsEnabled
+                    )
                     
-                    // General Notifications
-                    VStack(alignment: .leading, spacing: 12) {
-                        SectionHeader(title: "Thông báo chung")
-                        
-                        VStack(spacing: 8) {
-                            ToggleRowView(
-                                icon: "bell.badge",
-                                title: "Thông báo đẩy",
-                                subtitle: "Nhận thông báo khi có lịch hẹn",
-                                iconColor: .red,
-                                isOn: $pushNotificationsEnabled
-                            )
-                            
-                            ToggleRowView(
-                                icon: "speaker.wave.2",
-                                title: "Âm thanh",
-                                subtitle: "Phát âm thanh khi có thông báo",
-                                iconColor: .blue,
-                                isOn: $soundEnabled
-                            )
-                            
-                            ToggleRowView(
-                                icon: "iphone.radiowaves.left.and.right",
-                                title: "Rung",
-                                subtitle: "Rung khi có thông báo",
-                                iconColor: .purple,
-                                isOn: $vibrationEnabled
-                            )
-                            
-                            ToggleRowView(
-                                icon: "app.badge",
-                                title: "Hiển thị số",
-                                subtitle: "Hiển thị số thông báo trên icon app",
-                                iconColor: .green,
-                                isOn: $badgeEnabled
-                            )
-                        }
-                    }
+                    ToggleRowView(
+                        icon: "speaker.wave.2",
+                        title: "Âm thanh",
+                        subtitle: "Phát âm thanh khi có thông báo",
+                        iconColor: .blue,
+                        isOn: $soundEnabled
+                    )
                     
-                    // Sound Settings
-                    VStack(alignment: .leading, spacing: 12) {
-                        SectionHeader(title: "Âm thanh")
-                        
-                        PickerRowView(
-                            icon: "speaker.wave.3",
-                            title: "Âm thanh thông báo",
-                            subtitle: "Chọn âm thanh cho thông báo",
-                            iconColor: .orange,
-                            currentValue: selectedSound
-                        ) {
-                            showSoundPicker = true
-                        }
+                    ToggleRowView(
+                        icon: "iphone.radiowaves.left.and.right",
+                        title: "Rung",
+                        subtitle: "Rung khi có thông báo",
+                        iconColor: .purple,
+                        isOn: $vibrationEnabled
+                    )
+                } header: {
+                    Text("Thông báo chung")
+                }
+                
+                Section {
+                    PickerRowView(
+                        icon: "speaker.wave.3",
+                        title: "Âm thanh thông báo",
+                        subtitle: "Chọn âm thanh cho thông báo",
+                        iconColor: .orange,
+                        currentValue: selectedSound
+                    ) {
+                        showSoundPicker = true
                     }
+                } header: {
+                    Text("notification_text")
+                }
+                .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                
+                Section{
+                    ToggleRowView(
+                        icon: "clock",
+                        title: "15 phút trước",
+                        subtitle: "Nhắc nhở 15 phút trước sự kiện",
+                        iconColor: .cyan,
+                        isOn: $reminderBefore15Min
+                    )
                     
-                    // Reminder Timing
-                    VStack(alignment: .leading, spacing: 12) {
-                        SectionHeader(title: "Thời gian nhắc nhở")
-                        
-                        VStack(spacing: 8) {
-                            ToggleRowView(
-                                icon: "clock",
-                                title: "15 phút trước",
-                                subtitle: "Nhắc nhở 15 phút trước sự kiện",
-                                iconColor: .cyan,
-                                isOn: $reminderBefore15Min
-                            )
-                            
-                            ToggleRowView(
-                                icon: "clock",
-                                title: "1 giờ trước",
-                                subtitle: "Nhắc nhở 1 giờ trước sự kiện",
-                                iconColor: .indigo,
-                                isOn: $reminderBefore1Hour
-                            )
-                            
-                            ToggleRowView(
-                                icon: "clock",
-                                title: "1 ngày trước",
-                                subtitle: "Nhắc nhở 1 ngày trước sự kiện",
-                                iconColor: .pink,
-                                isOn: $reminderBefore1Day
-                            )
-                        }
-                    }
+                    ToggleRowView(
+                        icon: "clock",
+                        title: "1 giờ trước",
+                        subtitle: "Nhắc nhở 1 giờ trước sự kiện",
+                        iconColor: .indigo,
+                        isOn: $reminderBefore1Hour
+                    )
                     
-                    // Test Notification Button
-                    Button(action: testNotification) {
+                    ToggleRowView(
+                        icon: "clock",
+                        title: "1 ngày trước",
+                        subtitle: "Nhắc nhở 1 ngày trước sự kiện",
+                        iconColor: .pink,
+                        isOn: $reminderBefore1Day
+                    )
+                } header: {
+                    Text("Thời gian nhắc nhở")
+                }
+                
+                VStack{
+                    Button {
+                        isPressed.toggle()
+                        testNotification()
+                    } label: {
                         HStack(spacing: 8) {
                             Image(systemName: "bell.and.waves.left.and.right")
                                 .font(.system(size: 16, weight: .medium))
                             Text("Thử thông báo")
                                 .font(.system(size: 16, weight: .medium))
                         }
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.accentColor.opacity(0.1))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.accentColor, lineWidth: 1)
+                                )
+                        )
+                        .foregroundColor(.accentColor)
+                        .scaleEffect(isPressed ? 0.95 : 1.0)
+                        .opacity(isPressed ? 0.8 : 1.0)
+                        .animation(.easeInOut(duration: 0.1), value: isPressed)
                     }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 44)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.accentColor.opacity(0.1))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.accentColor, lineWidth: 1)
-                            )
-                    )
-                    .foregroundColor(.accentColor)
-                    
-                    Spacer(minLength: 20)
                 }
-                .padding(.horizontal, 20)
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
             }
             .navigationTitle("notification_text")
             .navigationBarTitleDisplayMode(.inline)
@@ -169,12 +143,10 @@ struct NotificationSettingsView: View {
     }
     
     private func testNotification() {
-        // TODO: Implement test notification
         print("Test notification triggered")
     }
     
     private func saveSettings() {
-        // TODO: Save notification settings to Supabase
         print("Saving notification settings...")
         dismiss()
     }

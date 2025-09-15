@@ -440,9 +440,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "home_page_text" : {
       "localizations" : {
         "en" : {
@@ -471,6 +468,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nội dung công việc"
+          }
+        }
+      }
+    },
+    "language_text" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ngôn ngữ"
           }
         }
       }
@@ -702,6 +715,9 @@
         }
       }
     },
+    "Request Permission" : {
+
+    },
     "save_text" : {
       "localizations" : {
         "en" : {
@@ -717,6 +733,9 @@
           }
         }
       }
+    },
+    "Schedule Notification" : {
+
     },
     "select_avatar" : {
       "localizations" : {
@@ -856,6 +875,12 @@
         }
       }
     },
+    "Thời gian nhắc nhở" : {
+
+    },
+    "Thông báo chung" : {
+
+    },
     "Thông tin kỹ thuật" : {
 
     },
@@ -896,9 +921,6 @@
           }
         }
       }
-    },
-    "Tùy chỉnh cách bạn nhận thông báo" : {
-
     },
     "Ứng dụng quản lý lịch hẹn thông minh" : {
 

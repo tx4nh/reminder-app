@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingView: View {
     let onSignOut: () -> Void
     @Environment(ThemeViewModel.self) private var themeViewModel
+    @Environment(AppLanguageManager.self) private var appLanguage
 
     var body: some View {
         @Bindable var themeViewModel = themeViewModel
@@ -93,7 +94,7 @@ struct SettingView: View {
                     )
 
                     NavigationLink{
-                        LanguageSettingView()
+                        LanguageSettingView(appLanguage: appLanguage)
                     } label: {
                         SettingRowView(
                             icon: "globe",
