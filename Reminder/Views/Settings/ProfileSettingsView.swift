@@ -20,6 +20,15 @@ struct ProfileSettingsView: View {
         "person.2.circle.fill",
         "person.3.circle.fill"
     ]
+
+    private var formattedDate: String {
+       let currentDate = Date()
+       let dateFormatter = DateFormatter()
+       dateFormatter.dateStyle = .long
+       dateFormatter.timeStyle = .short
+       dateFormatter.locale = Locale(identifier: "vi_VN")
+        return dateFormatter.string(from: currentDate).capitalized
+   }
     
     var body: some View {
         NavigationView {
@@ -49,7 +58,7 @@ struct ProfileSettingsView: View {
                                                 .font(.system(size: 12, weight: .medium))
                                                 .foregroundColor(.white)
                                         }
-                                        .offset(x: -8, y: -8)
+                                        .offset(x: -100, y: -8)
                                     }
                                 }
                             }
@@ -129,7 +138,7 @@ struct ProfileSettingsView: View {
                             InfoRowView(
                                 icon: "clock",
                                 title: "Lần đăng nhập cuối",
-                                value: "Hôm nay, 14:30",
+                                value: "\(formattedDate)",
                                 iconColor: .green
                             )
                         }

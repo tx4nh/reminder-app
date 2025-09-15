@@ -37,3 +37,21 @@ struct InfoRowView: View {
         )
     }
 }
+
+#Preview{
+    VStack(spacing: 8) {
+        InfoRowView(
+            icon: "calendar",
+            title: "Ngày tạo tài khoản",
+            value: "15/03/2024",
+            iconColor: .blue
+        )
+        
+        InfoRowView(
+            icon: "clock",
+            title: "Lần đăng nhập cuối",
+            value: "Hôm nay",
+            iconColor: .green
+        )
+    }
+}
