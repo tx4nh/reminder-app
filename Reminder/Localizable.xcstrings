@@ -43,14 +43,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Account information"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thong tin tài khoản"
+            "value" : "Thông tin tài khoản"
           }
         }
       }
@@ -210,6 +210,23 @@
         }
       }
     },
+    "change_app_language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change app language"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thay đổi ngôn ngữ ứng dụng"
+          }
+        }
+      }
+    },
     "change_password" : {
       "localizations" : {
         "en" : {
@@ -311,6 +328,28 @@
     },
     "Đang lưu..." : {
 
+    },
+    "dark_interface_for_eye" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giao diện tối cho mắt"
+          }
+        }
+      }
+    },
+    "dark_mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chế độ tối"
+          }
+        }
+      }
     },
     "delete_text" : {
       "localizations" : {
@@ -652,6 +691,7 @@
       }
     },
     "phone_number" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

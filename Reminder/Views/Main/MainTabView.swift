@@ -15,7 +15,7 @@ struct MainTabView: View {
             }
             
             Tab("setting_text", systemImage: "gearshape.fill") {
-                SettingView (onSignOut: {
+                SettingView (appUser: appUser, onSignOut: {
                         onSignOut()
                 })
             }

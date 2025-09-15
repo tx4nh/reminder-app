@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SettingView: View {
+    let appUser: AppUser
     let onSignOut: () -> Void
     @Environment(ThemeViewModel.self) private var themeViewModel
     @Environment(AppLanguageManager.self) private var appLanguage
@@ -23,7 +24,7 @@ struct SettingView: View {
                                     .foregroundColor(.accentColor)
                             }
                         
-                            VStack(spacing: 4) {
+                            HStack(spacing: 4) {
                                 Text("hello_text")
                                     .font(.title2)
                                     .fontWeight(.bold)
@@ -39,7 +40,7 @@ struct SettingView: View {
 
                 Section {
                     NavigationLink {
-                        ProfileSettingsView()
+                        ProfileSettingsView(appUser: appUser)
                             .navigationBarBackButtonHidden()
                     } label: {
                         SettingRowView(
@@ -87,8 +88,8 @@ struct SettingView: View {
                 Section {
                     ToggleRowView(
                         icon: "moon.fill",
-                        title: "Chế độ tối",
-                        subtitle: "Giao diện tối cho mắt",
+                        title: "dark_mode",
+                        subtitle: "dark_interface_for_eye",
                         iconColor: .indigo,
                         isOn: $themeViewModel.isDarkMode
                     )
@@ -98,8 +99,8 @@ struct SettingView: View {
                     } label: {
                         SettingRowView(
                             icon: "globe",
-                            title: "Ngôn ngữ",
-                            subtitle: "Thay đổi ngôn ngữ ứng dụng",
+                            title: "language_text",
+                            subtitle: "change_app_language",
                             iconColor: .purple,
                         )
                     }
@@ -179,7 +180,7 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(onSignOut: {
+    SettingView(appUser: .init(uid: "2311", email: "anhhihi@gmail.com"), onSignOut: {
         print("Sign Out")
     })
 }

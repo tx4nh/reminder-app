@@ -2,14 +2,14 @@ import SwiftUI
 
 struct SettingRowView: View {
     let icon: String
-    let title: String
-    let subtitle: String?
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey?
     let iconColor: Color
     
     init(icon: String, title: String, subtitle: String? = nil, iconColor: Color = .accentColor) {
         self.icon = icon
-        self.title = title
-        self.subtitle = subtitle
+        self.title = LocalizedStringKey(title)
+        self.subtitle = LocalizedStringKey(subtitle ?? "")
         self.iconColor = iconColor
     }
     

@@ -2,15 +2,15 @@ import SwiftUI
 
 struct ToggleRowView: View {
     let icon: String
-    let title: String
-    let subtitle: String?
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey?
     let iconColor: Color
     @Binding var isOn: Bool
     
     init(icon: String, title: String, subtitle: String? = nil, iconColor: Color = .accentColor, isOn: Binding<Bool>) {
         self.icon = icon
-        self.title = title
-        self.subtitle = subtitle
+        self.title = LocalizedStringKey(title)
+        self.subtitle = LocalizedStringKey(subtitle ?? "")
         self.iconColor = iconColor
         self._isOn = isOn
     }
