@@ -71,22 +71,6 @@
         }
       }
     },
-    "add_event" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add event"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Thêm sự kiện"
-          }
-        }
-      }
-    },
     "add_new_schedule" : {
       "localizations" : {
         "en" : {
@@ -249,6 +233,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Thay đổi mật khẩu"
+          }
+        }
+      }
+    },
+    "choose_date" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chọn ngày"
           }
         }
       }
@@ -804,6 +798,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chọn ảnh đại diện"
+          }
+        }
+      }
+    },
+    "select_date" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chọn ngày"
           }
         }
       }
