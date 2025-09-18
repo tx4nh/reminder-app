@@ -178,6 +178,16 @@
         }
       }
     },
+    "are_you_sure_signout" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn có chắc muốn đăng xuất"
+          }
+        }
+      }
+    },
     "cancel_button" : {
       "localizations" : {
         "en" : {
@@ -287,6 +297,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Xác nhận mật khẩu mới"
+          }
+        }
+      }
+    },
+    "confirm_sign_out" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xác nhận đăng xuất"
           }
         }
       }

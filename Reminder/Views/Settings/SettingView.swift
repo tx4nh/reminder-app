@@ -6,6 +6,7 @@ struct SettingView: View {
     @Environment(ThemeViewModel.self) private var themeViewModel
     @Environment(AppLanguageManager.self) private var appLanguage
     @Environment(UserNameViewModel.self) private var userName
+    @State private var showSignOutAlert: Bool = false
 
     var body: some View {
         @Bindable var themeViewModel = themeViewModel
@@ -157,7 +158,7 @@ struct SettingView: View {
                 
                 VStack(spacing: 16) {
                     Button(action: {
-                        onSignOut()
+                        showSignOutAlert.toggle()
                     }) {
                         HStack(spacing: 8) {
                             Image(systemName: "rectangle.portrait.and.arrow.right")
@@ -177,6 +178,14 @@ struct SettingView: View {
                 }
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
+                .alert("confirm_sign_out", isPresented: $showSignOutAlert) {
+                    Button("cancel_text", role: .cancel) {}
+                    Button("sign_out_text", role: .destructive){
+                        onSignOut()
+                    }
+                } message: {
+                    Text("are_you_sure_signout")
+                }
             }
             .navigationTitle("setting_text")
             .navigationBarTitleDisplayMode(.automatic)

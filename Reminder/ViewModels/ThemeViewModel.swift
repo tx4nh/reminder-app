@@ -18,6 +18,4 @@ class ThemeViewModel {
             }
         }
     }
-    
-    // @AppStorage("isDarkMode") var isDarkMode: Bool = false
 }
