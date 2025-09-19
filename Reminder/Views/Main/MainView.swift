@@ -36,6 +36,11 @@ struct MainView: View {
                 
                 Spacer()
                 
+                DateListView()
+                    .padding(.horizontal, 5)
+                
+                Spacer()
+                
                 ScheduleView(appUser: appUser)
                 
                 Spacer()
