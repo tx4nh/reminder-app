@@ -2,19 +2,24 @@ import SwiftUI
 
 struct ReminderAppView: View {
     @State private var appUser: AppUser? = nil
-    @State private var isLoading: Bool = false
-    
+    @State private var isLoading: Bool = true
+
     var body: some View {
         VStack {
-            if let user = appUser {
-                MainTabView(appUser: user, onSignOut: {
-                    Task{
-                        try await supabase.auth.signOut()
-                        appUser = nil
-                    }
-                })
+            if isLoading {
+                LoadingView()
             } else {
-                SignInView(appUser: $appUser)
+                if let user = appUser {
+                    MainTabView(appUser: user, onSignOut: {
+                        Task{
+                            try await supabase.auth.signOut()
+                            appUser = nil
+                            isLoading = false
+                        }
+                    })
+                } else {
+                    SignInView(appUser: $appUser)
+                }
             }
         }
         .animation(.easeInOut(duration: 0.3), value: appUser != nil)
@@ -34,8 +39,10 @@ struct ReminderAppView: View {
                 )
                 
                 self.appUser = user
+                isLoading = false
             } catch{
                 print("No User")
+                isLoading = false
             }
         }
     }

@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct LoadingView: View {
+    @State private var themeViewModel = ThemeViewModel()
     @State private var isRotating = false
     
     var body: some View {
         ZStack {
-            Color.black.opacity(0.3)
-                .ignoresSafeArea()
+            Color(themeViewModel.isDarkMode ? .black : .white)                .ignoresSafeArea()
             
             Circle()
                 .trim(from: 0, to: 0.7)
