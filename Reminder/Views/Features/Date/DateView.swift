@@ -2,7 +2,7 @@ import SwiftUI
 
 struct DateView: View {
     let day: Int
-    @State private var isPress: Bool = false
+    let isSelected: Bool
     @State private var today = Date()
     @Environment(AppLanguageManager.self) var appLanguage
 
@@ -29,16 +29,16 @@ struct DateView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .stroke(isToday ? Color.blue : isPress ? Color.blue : Color.gray, lineWidth: 2)
+                .stroke(isToday ? Color.blue : isSelected ? Color.blue : Color.gray, lineWidth: 2)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(isToday ? Color.blue : Color.white)
+                        .fill(isToday ? Color.blue : isSelected ? .blue.opacity(0.3) : .white)
                 )
                 .frame(width: 50, height: 60)
 
             VStack(spacing: 6) {
                 Text(String(format: "%02d", Calendar.current.component(.day, from: dateForDay ?? today)))
-                    .foregroundStyle(isToday ? .white : .gray)
+                    .foregroundStyle(isToday ? .white : isSelected ? .blue : .gray)
                     .font(.title2)
                     .fontWeight(.bold)
 
@@ -46,17 +46,15 @@ struct DateView: View {
                     Text(weekdayAbbreviation(for: dateForDay ?? today))
                     Text(String(format: "%02d", Calendar.current.component(.month, from: dateForDay ?? today)))
                 }
-                .foregroundStyle(isToday ? .white : .gray)
+                .foregroundStyle(isToday ? .white : isSelected ? .blue : .gray)
                 .font(.caption)
                 .foregroundColor(.secondary)
             }
         }
-        .onTapGesture {
-            isPress.toggle()
-        }
     }
 }
 
-#Preview("Today") {
-    DateView(day: 24)
+#Preview() {
+    DateView(day: 24, isSelected: false)
+        .environment(AppLanguageManager())
 }

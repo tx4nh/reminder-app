@@ -123,4 +123,5 @@ struct CustomButtonStyle: ButtonStyle {
 
 #Preview {
     MainView(appUser: AppUser(uid: "123", email: "123@example.com"))
+        .environment(AppLanguageManager())
 }
