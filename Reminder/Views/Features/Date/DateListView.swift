@@ -8,7 +8,8 @@ struct DateListView: View {
                     DateView(day: day)
                         .padding(.vertical, 2)
                         .padding(.horizontal, 3)
-                }            }
+                }
+            }
         }
 
     }
