@@ -3,7 +3,7 @@ import SwiftUI
 struct ProfileSettingsView: View {
     let appUser: AppUser
     @Environment(\.dismiss) private var dismiss
-    @Environment(AppLanguageManager.self) var appSetting
+    @Environment(AppLanguageManager.self) var appLanguage
     @Bindable var userName: UserNameViewModel
 
     @State private var displayName = ""
@@ -25,7 +25,7 @@ struct ProfileSettingsView: View {
        let dateFormatter = DateFormatter()
        dateFormatter.dateStyle = .long
        dateFormatter.timeStyle = .short
-        dateFormatter.locale = Locale(identifier: appSetting.language.id)
+        dateFormatter.locale = Locale(identifier: appLanguage.language.id)
         return dateFormatter.string(from: currentDate).capitalized
    }
     

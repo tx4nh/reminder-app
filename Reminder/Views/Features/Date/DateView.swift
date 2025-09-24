@@ -4,6 +4,7 @@ struct DateView: View {
     let day: Int
     @State private var isPress: Bool = false
     @State private var today = Date()
+    @Environment(AppLanguageManager.self) var appLanguage
 
     private var isToday: Bool {
         return day == Calendar.current.component(.day, from: today)
@@ -21,6 +22,7 @@ struct DateView: View {
     private func weekdayAbbreviation(for date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EE"
+        formatter.locale = Locale(identifier: appLanguage.language.rawValue)
         return formatter.string(from: date)
     }
 
@@ -32,7 +34,7 @@ struct DateView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(isToday ? Color.blue : Color.white)
                 )
-                .frame(width: 48, height: 60)
+                .frame(width: 50, height: 60)
 
             VStack(spacing: 6) {
                 Text(String(format: "%02d", Calendar.current.component(.day, from: dateForDay ?? today)))
@@ -55,6 +57,6 @@ struct DateView: View {
     }
 }
 
-#Preview {
-    DateView(day: 61)
+#Preview("Today") {
+    DateView(day: 24)
 }
