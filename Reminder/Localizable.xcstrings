@@ -172,6 +172,9 @@
         }
       }
     },
+    "Biểu tượng" : {
+
+    },
     "cancel_button" : {
       "localizations" : {
         "en" : {
@@ -237,7 +240,11 @@
         }
       }
     },
+    "Chọn ngày" : {
+
+    },
     "choose_date" : {
+      "extractionState" : "stale",
       "localizations" : {
         "vi" : {
           "stringUnit" : {
@@ -518,6 +525,9 @@
         }
       }
     },
+    "Hủy" : {
+
+    },
     "job_content" : {
       "localizations" : {
         "en" : {
@@ -553,6 +563,9 @@
         }
       }
     },
+    "Lưu" : {
+
+    },
     "Lưu thay đổi" : {
 
     },
@@ -587,6 +600,9 @@
           }
         }
       }
+    },
+    "Ngày trong tuần" : {
+
     },
     "Nhà phát triển" : {
 
@@ -803,6 +819,7 @@
       }
     },
     "select_date" : {
+      "extractionState" : "stale",
       "localizations" : {
         "vi" : {
           "stringUnit" : {
@@ -908,6 +925,12 @@
         }
       }
     },
+    "Sự kiện theo năm" : {
+
+    },
+    "Sự kiện theo tuần" : {
+
+    },
     "support_text" : {
       "localizations" : {
         "en" : {
@@ -923,6 +946,9 @@
           }
         }
       }
+    },
+    "Tên sự kiện" : {
+
     },
     "terms_of_use" : {
       "localizations" : {
@@ -940,6 +966,15 @@
         }
       }
     },
+    "Thêm sự kiện" : {
+
+    },
+    "Thêm sự kiện hàng năm" : {
+
+    },
+    "Thêm sự kiện hàng tuần" : {
+
+    },
     "Thời gian nhắc nhở" : {
 
     },
@@ -947,6 +982,9 @@
 
     },
     "Thông tin kỹ thuật" : {
+
+    },
+    "Thông tin sự kiện" : {
 
     },
     "Thử thông báo" : {
