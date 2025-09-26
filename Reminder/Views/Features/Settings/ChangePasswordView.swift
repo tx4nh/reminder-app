@@ -138,30 +138,24 @@ struct ChangePasswordView: View {
 
             do {
                 _ = try await supabase.auth.signIn(email: email, password: currentPassword)
-                
                 try await supabase.auth.update(user: UserAttributes(password: newPassword))
                 
-                await MainActor.run {
-                    isLoading = false
-                    alertMessage = "Mật khẩu đã được cập nhật thành công!"
-                    showAlert = true
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        dismiss()
-                    }
-                }
+                isLoading = false
+                alertMessage = "Mật khẩu đã được cập nhật thành công!"
+                showAlert = true
 
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    dismiss()
+                }
             } catch {
-//                await MainActor.run {
-                    isLoading = false
-                    if error.localizedDescription.contains("Invalid login credentials") {
-                        alertMessage = "Mật khẩu hiện tại không chính xác"
-                    } else {
-                        alertMessage = "Lỗi: \(error.localizedDescription)"
-                    }
-                    showAlert = true
-//                }
-            }
+                isLoading = false
+                if error.localizedDescription.contains("Invalid login credentials") {
+                    alertMessage = "Mật khẩu hiện tại không chính xác"
+                } else {
+                    alertMessage = "Lỗi: \(error.localizedDescription)"
+                }
+                showAlert = true
+        }
         }
     }
 }

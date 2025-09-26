@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28848A462E86425D003D53FA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 28848A452E86425D003D53FA /* README.md */; };
 		28C958042E45AE510051C293 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 28C958032E45AE510051C293 /* Supabase */; };
 		28C958082E45B00B0051C293 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 28C958072E45B00B0051C293 /* .gitignore */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		28553C322E444286006C1EF3 /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28553C3F2E444288006C1EF3 /* ReminderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReminderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28553C492E444288006C1EF3 /* ReminderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReminderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28848A452E86425D003D53FA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		28C958072E45B00B0051C293 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 				28C958022E45AE510051C293 /* Frameworks */,
 				28553C332E444286006C1EF3 /* Products */,
 				28C958072E45B00B0051C293 /* .gitignore */,
+				28848A452E86425D003D53FA /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -233,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28848A462E86425D003D53FA /* README.md in Resources */,
 				28C958082E45B00B0051C293 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
