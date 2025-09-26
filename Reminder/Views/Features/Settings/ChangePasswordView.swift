@@ -1,6 +1,8 @@
 import SwiftUI
+import Supabase
 
 struct ChangePasswordView: View {
+    let appUser: AppUser
     @Environment(\.dismiss) private var dismiss
     @State private var currentPassword = ""
     @State private var newPassword = ""
@@ -13,26 +15,14 @@ struct ChangePasswordView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 24) {
-                    // Header
                     VStack(spacing: 8) {
                         Image(systemName: "key.fill")
                             .font(.system(size: 40))
                             .foregroundColor(.accentColor)
-                        
-                        Text("change_password")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                        
-                        Text("Nhập mật khẩu hiện tại và mật khẩu mới")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
                     }
                     .padding(.top, 20)
                     
-                    // Form
                     VStack(spacing: 16) {
-                        // Current Password
                         VStack(alignment: .leading, spacing: 8) {
                             Text("current_password")
                                 .font(.system(size: 14, weight: .medium))
@@ -41,7 +31,6 @@ struct ChangePasswordView: View {
                             SecureFieldView(password: $currentPassword)
                         }
                         
-                        // New Password
                         VStack(alignment: .leading, spacing: 8) {
                             Text("new_password")
                                 .font(.system(size: 14, weight: .medium))
@@ -50,7 +39,6 @@ struct ChangePasswordView: View {
                             SecureFieldView(password: $newPassword)
                         }
                         
-                        // Confirm Password
                         VStack(alignment: .leading, spacing: 8) {
                             Text("confirm_new_password")
                                 .font(.system(size: 14, weight: .medium))
@@ -60,7 +48,6 @@ struct ChangePasswordView: View {
                         }
                     }
                     
-                    // Password Requirements
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Yêu cầu mật khẩu:")
                             .font(.system(size: 14, weight: .medium))
@@ -76,8 +63,7 @@ struct ChangePasswordView: View {
                     .padding(.horizontal, 4)
                     
                     Spacer(minLength: 20)
-                    
-                    // Change Password Button
+
                     Button(action: changePassword) {
                         HStack {
                             if isLoading {
@@ -139,18 +125,42 @@ struct ChangePasswordView: View {
     }
     
     private func changePassword() {
+        guard isFormValid else { return }
+        
         isLoading = true
         
-        // TODO: Implement password change logic with Supabase
-        // This is where you'll call your Supabase auth update password method
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            isLoading = false
-            alertMessage = "Mật khẩu đã được cập nhật thành công!"
-            showAlert = true
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                dismiss()
+        Task {
+            guard let email = appUser.email, !email.isEmpty else {
+                alertMessage = "Không thể xác định email người dùng"
+                showAlert = true
+                return
+            }
+
+            do {
+                _ = try await supabase.auth.signIn(email: email, password: currentPassword)
+                
+                try await supabase.auth.update(user: UserAttributes(password: newPassword))
+                
+                await MainActor.run {
+                    isLoading = false
+                    alertMessage = "Mật khẩu đã được cập nhật thành công!"
+                    showAlert = true
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        dismiss()
+                    }
+                }
+
+            } catch {
+//                await MainActor.run {
+                    isLoading = false
+                    if error.localizedDescription.contains("Invalid login credentials") {
+                        alertMessage = "Mật khẩu hiện tại không chính xác"
+                    } else {
+                        alertMessage = "Lỗi: \(error.localizedDescription)"
+                    }
+                    showAlert = true
+//                }
             }
         }
     }
@@ -176,5 +186,5 @@ struct RequirementRow: View {
 }
 
 #Preview {
-    ChangePasswordView()
+    ChangePasswordView(appUser: .init(uid: "2311", email: "atdevv@gmail.com"))
 }

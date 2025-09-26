@@ -63,7 +63,7 @@ struct SettingView: View {
                         .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                         
                         NavigationLink {
-                            ChangePasswordView()
+                            ChangePasswordView(appUser: appUser)
                                 .navigationBarBackButtonHidden()
                         } label: {
                             SettingRowView(
