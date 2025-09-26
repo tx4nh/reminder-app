@@ -4,6 +4,7 @@ struct EventView: View {
     @State private var selectedDate = Date()
     @State private var showingYearlyEventForm = false
     @State private var showingWeeklyEventForm = false
+    @State private var showPopover = false
 
     @State private var yearlyEvents: [YearlyEvent] = []
     @State private var weeklyEvents: [WeeklyEvent] = []
@@ -85,7 +86,7 @@ struct EventView: View {
     private func deleteYearlyEvent(at offsets: IndexSet) {
         yearlyEvents.remove(atOffsets: offsets)
     }
-    
+
     private func deleteWeeklyEvent(at offsets: IndexSet) {
         weeklyEvents.remove(atOffsets: offsets)
     }

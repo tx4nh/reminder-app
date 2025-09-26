@@ -4,47 +4,104 @@ import SwiftUI
 struct AddYearlyEventView: View {
     @Binding var events: [YearlyEvent]
     @Environment(\.dismiss) private var dismiss
+    @State private var showPopover = false
 
     @State private var title = ""
     @State private var selectedDate = Date()
 
-    private let availableIcons = [
-        "calendar", "gift", "sparkles", "flag", "moon.stars",
-        "heart", "star", "party.popper", "balloon", "cake"
-    ]
-
     var body: some View {
-        NavigationView {
-            Form {
-                Section("Thông tin sự kiện") {
-                    TextField("Tên sự kiện", text: $title)
-                    
-                    DatePicker("Chọn ngày", selection: $selectedDate, displayedComponents: [.date])
-                        .datePickerStyle(.compact)
-                }
-            }
-            .navigationTitle("Thêm sự kiện hàng năm")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Hủy") {
-                        dismiss()
-                    }
-                }
+        VStack(spacing: 20) {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(Color.secondary.opacity(0.3))
+                .frame(width: 36, height: 4)
+                .padding(.top, 8)
+            
+            VStack(spacing: 16) {
+                Text("Thêm sự kiện hàng năm")
+                    .font(.title3)
+                    .fontWeight(.semibold)
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Lưu") {
-                        let newEvent = YearlyEvent(
-                            id: (events.map { $0.id }.max() ?? 0) + 1,
-                            title: title,
-                            date: selectedDate
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Tên sự kiện")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
+                    
+                    TextField("Nhập tên sự kiện", text: $title)
+                        .frame(height: 40)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color(.systemGray4), lineWidth: 1)
                         )
-                        events.append(newEvent)
-                        dismiss()
+                        .font(.system(size: 16))
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Ngày thông báo")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
+                    
+                    HStack {
+                        Text(formattedDate)
+                            .font(.system(size: 16))
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
+                        
+                        DatePicker("", selection: $selectedDate, displayedComponents: [.date])
+                            .datePickerStyle(.compact)
+                            .labelsHidden()
                     }
-                    .disabled(title.isEmpty)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(.systemGray4), lineWidth: 1)
+                    )
                 }
             }
+            .padding(.horizontal, 20)
+            
+            Spacer()
+
+            HStack(spacing: 12) {
+                Button("Hủy") {
+                    dismiss()
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(.regularMaterial)
+                .cornerRadius(8)
+                
+                Button("Lưu") {
+                    dismiss()
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+            }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
         }
+        .presentationDetents([.height(370)])
     }
+
+    private var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM"
+        return formatter.string(from: selectedDate)
+    }
+}
+
+#Preview{
+    AddYearlyEventView(events: .constant([]))
 }

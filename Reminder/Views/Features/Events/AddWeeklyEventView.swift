@@ -9,45 +9,98 @@ struct AddWeeklyEventView: View {
     @State private var selectedDayOfWeek = 2
     
     private let weekDays = [
-        (1, "Chủ Nhật"), (2, "Thứ 2"), (3, "Thứ 3"), (4, "Thứ 4"),
-        (5, "Thứ 5"), (6, "Thứ 6"), (7, "Thứ 7")
+        "Chủ Nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5",  "Thứ 6", "Thứ 7"
     ]
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section("Thông tin sự kiện") {
-                    TextField("Tên sự kiện", text: $title)
+        VStack(spacing: 20) {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(Color.secondary.opacity(0.3))
+                .frame(width: 36, height: 4)
+                .padding(.top, 8)
+            
+            VStack(spacing: 16) {
+                Text("Thêm sự kiện hàng tuần")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Tên sự kiện")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
                     
-                    Picker("Ngày trong tuần", selection: $selectedDayOfWeek) {
-                        ForEach(weekDays, id: \.0) { day in
-                            Text(day.1).tag(day.0)
+                    TextField("Nhập tên sự kiện", text: $title)
+                        .frame(height: 40)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color(.systemGray4), lineWidth: 1)
+                        )
+                        .font(.system(size: 16))
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Thời gian thông báo")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundColor(.secondary)
+                    
+                    HStack {
+                        Text(weekDays[selectedDayOfWeek - 1])
+                            .font(.system(size: 16))
+                            .foregroundColor(.primary)
+
+                        Spacer()
+
+                        Picker("Ngày trong tuần", selection: $selectedDayOfWeek) {
+                            ForEach(weekDays.indices, id: \.self) { index in
+                                Text(weekDays[index]).tag(index + 1)
+                            }
                         }
                     }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(.systemGray4), lineWidth: 1)
+                    )
                 }
             }
-            .navigationTitle("Thêm sự kiện hàng tuần")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Hủy") {
-                        dismiss()
-                    }
+            .padding(.horizontal, 20)
+            
+            Spacer()
+
+            HStack(spacing: 12) {
+                Button("Hủy") {
+                    dismiss()
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(.regularMaterial)
+                .cornerRadius(8)
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Lưu") {
-                        let newEvent = WeeklyEvent(
-                            id: (events.map { $0.id }.max() ?? 0) + 1,
-                            title: title,
-                            dayOfWeek: selectedDayOfWeek,
-                        )
-                        events.append(newEvent)
-                        dismiss()
-                    }
-                    .disabled(title.isEmpty)
+                Button("Lưu") {
+                    dismiss()
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(.blue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
             }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 20)
         }
+        .presentationDetents([.height(370)])
     }
+}
+
+#Preview {
+    AddWeeklyEventView(events: .constant([]))
 }
