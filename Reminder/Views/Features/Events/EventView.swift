@@ -33,12 +33,12 @@ struct EventView: View {
                         HStack {
                             Image(systemName: "plus.circle")
                                 .foregroundColor(.blue)
-                            Text("Thêm sự kiện")
+                            Text("add_event")
                                 .foregroundColor(.blue)
                         }
                     }
                 } header: {
-                    Text("Sự kiện theo năm")
+                    Text("event_every_year")
                 }
                 .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
 
@@ -63,12 +63,12 @@ struct EventView: View {
                         HStack {
                             Image(systemName: "plus.circle")
                                 .foregroundColor(.blue)
-                            Text("Thêm sự kiện")
+                            Text("add_event")
                                 .foregroundColor(.blue)
                         }
                     }
                 } header: {
-                    Text("Sự kiện theo tuần")
+                    Text("event_every_week")
                 }
                 .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             }

@@ -71,6 +71,36 @@
         }
       }
     },
+    "add_event" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm sự kiện"
+          }
+        }
+      }
+    },
+    "add_events_every_week" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm sự kiện tuần"
+          }
+        }
+      }
+    },
+    "add_events_every_year" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm sự kiện năm"
+          }
+        }
+      }
+    },
     "add_new_schedule" : {
       "localizations" : {
         "en" : {
@@ -172,9 +202,6 @@
         }
       }
     },
-    "Biểu tượng" : {
-
-    },
     "cancel_button" : {
       "localizations" : {
         "en" : {
@@ -236,20 +263,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Thay đổi mật khẩu"
-          }
-        }
-      }
-    },
-    "Chọn ngày" : {
-
-    },
-    "choose_date" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chọn ngày"
           }
         }
       }
@@ -381,6 +394,16 @@
         }
       }
     },
+    "day_notifica" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ngày thông báo"
+          }
+        }
+      }
+    },
     "delete_text" : {
       "localizations" : {
         "en" : {
@@ -461,6 +484,16 @@
         }
       }
     },
+    "enter_event_name" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nhập tên sự kiện"
+          }
+        }
+      }
+    },
     "enter_to_day_to_do_list" : {
       "localizations" : {
         "en" : {
@@ -473,6 +506,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nhập việc cần làm hôm nay…"
+          }
+        }
+      }
+    },
+    "event_every_week" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sự kiện tuần"
+          }
+        }
+      }
+    },
+    "event_every_year" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sự kiện năm"
+          }
+        }
+      }
+    },
+    "event_name" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tên sự kiện"
           }
         }
       }
@@ -525,9 +588,6 @@
         }
       }
     },
-    "Hủy" : {
-
-    },
     "job_content" : {
       "localizations" : {
         "en" : {
@@ -562,9 +622,6 @@
           }
         }
       }
-    },
-    "Lưu" : {
-
     },
     "Lưu thay đổi" : {
 
@@ -605,9 +662,6 @@
 
     },
     "Nhà phát triển" : {
-
-    },
-    "Nhập mật khẩu hiện tại và mật khẩu mới" : {
 
     },
     "no_schedule_added" : {
@@ -818,17 +872,6 @@
         }
       }
     },
-    "select_date" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chọn ngày"
-          }
-        }
-      }
-    },
     "select_text" : {
       "localizations" : {
         "en" : {
@@ -925,12 +968,6 @@
         }
       }
     },
-    "Sự kiện theo năm" : {
-
-    },
-    "Sự kiện theo tuần" : {
-
-    },
     "support_text" : {
       "localizations" : {
         "en" : {
@@ -946,9 +983,6 @@
           }
         }
       }
-    },
-    "Tên sự kiện" : {
-
     },
     "terms_of_use" : {
       "localizations" : {
@@ -966,15 +1000,6 @@
         }
       }
     },
-    "Thêm sự kiện" : {
-
-    },
-    "Thêm sự kiện hàng năm" : {
-
-    },
-    "Thêm sự kiện hàng tuần" : {
-
-    },
     "Thời gian nhắc nhở" : {
 
     },
@@ -982,9 +1007,6 @@
 
     },
     "Thông tin kỹ thuật" : {
-
-    },
-    "Thông tin sự kiện" : {
 
     },
     "Thử thông báo" : {

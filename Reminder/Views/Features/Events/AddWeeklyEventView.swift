@@ -20,17 +20,17 @@ struct AddWeeklyEventView: View {
                 .padding(.top, 8)
             
             VStack(spacing: 16) {
-                Text("Thêm sự kiện hàng tuần")
+                Text("add_events_every_week")
                     .font(.title3)
                     .fontWeight(.semibold)
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Tên sự kiện")
+                    Text("event_name")
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .foregroundColor(.secondary)
                     
-                    TextField("Nhập tên sự kiện", text: $title)
+                    TextField("enter_event_name", text: $title)
                         .frame(height: 40)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
@@ -44,7 +44,7 @@ struct AddWeeklyEventView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Thời gian thông báo")
+                    Text("notification_time")
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .foregroundColor(.secondary)
@@ -77,7 +77,7 @@ struct AddWeeklyEventView: View {
             Spacer()
 
             HStack(spacing: 12) {
-                Button("Hủy") {
+                Button("cancel_text") {
                     dismiss()
                 }
                 .frame(maxWidth: .infinity)
@@ -85,7 +85,7 @@ struct AddWeeklyEventView: View {
                 .background(.regularMaterial)
                 .cornerRadius(8)
                 
-                Button("Lưu") {
+                Button("save_text") {
                     dismiss()
                 }
                 .frame(maxWidth: .infinity)
