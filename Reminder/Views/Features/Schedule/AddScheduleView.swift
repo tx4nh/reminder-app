@@ -4,6 +4,7 @@ struct AddScheduleView: View {
     let appUser: AppUser
     @State private var selectedDate = Date()
     @State private var text: String = ""
+    @State private var scheduleViewModel = ScheduleViewModel()
     @Environment(\.presentationMode) var presentationMode
     @FocusState private var isTextFieldFocused: Bool
     
@@ -175,7 +176,7 @@ struct AddScheduleView: View {
         
          Task{
              do{
-                 try await ScheduleViewModel().insertSchedule(user_uid: appUser.uid, text: text, time: time)
+                 try await scheduleViewModel.insertSchedule(user_uid: appUser.uid, text: text, time: time)
                  presentationMode.wrappedValue.dismiss()
              } catch{
                  print(error)

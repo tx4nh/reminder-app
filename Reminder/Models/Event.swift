@@ -4,16 +4,21 @@ struct Event: Codable, Identifiable {
     let id: UUID?
     let userID: String
     var title: String
-    var eventDate: Date
+    var eventDateString: String
     var eventType: String
     var repeatDay: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
-        case userID = "user_id"
+        case userID = "user_uid"
         case title
-        case eventDate = "event_date"
+        case eventDateString = "event_date"
         case eventType = "event_type"
         case repeatDay = "repeat_day"
-   }
+    }
+    
+    var eventDate: Date {
+        let formatter = ISO8601DateFormatter()
+        return formatter.date(from: eventDateString) ?? Date()
+    }
 }

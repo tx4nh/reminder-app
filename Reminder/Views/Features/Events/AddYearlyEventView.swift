@@ -2,10 +2,9 @@ import Foundation
 import SwiftUI
 
 struct AddYearlyEventView: View {
-    @Binding var events: [Event]
+    let appUser: AppUser
     @Environment(\.dismiss) private var dismiss
-    @State private var showPopover = false
-
+    @State private var eventViewModel = EventViewModel()
     @State private var title = ""
     @State private var selectedDate = Date()
 
@@ -28,6 +27,7 @@ struct AddYearlyEventView: View {
                         .foregroundColor(.secondary)
                     
                     TextField("enter_event_name", text: $title)
+                        .autocorrectionDisabled()
                         .frame(height: 40)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
@@ -81,27 +81,60 @@ struct AddYearlyEventView: View {
                 .cornerRadius(8)
                 
                 Button("save_text") {
-                    dismiss()
+                    if !title.trimmingCharacters(in: .whitespaces).isEmpty {
+                            addEvent()
+                            dismiss()
+                       }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 12)
                 .background(.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
+                .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
+                .opacity(title.trimmingCharacters(in: .whitespaces).isEmpty ? 0.6 : 1)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
         }
         .presentationDetents([.height(370)])
     }
-
+    
     private var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM"
         return formatter.string(from: selectedDate)
     }
+
+    private func extractDayMonth() -> Date {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.day, .month, .year], from: selectedDate)
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        return calendar.date(from: components) ?? selectedDate
+    }
+    
+    private func addEvent() {
+        Task{
+            do{
+                try await eventViewModel
+                    .insertEvent(
+                        user_uid: appUser.uid,
+                        title: title,
+                        event_date: extractDayMonth(),
+                        event_type: "yearly"
+                    )
+            } catch{
+                print(
+                    "Error with add event"
+                )
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 #Preview{
-    AddYearlyEventView(events: .constant([]))
+    AddYearlyEventView(appUser: .init(uid: "2311", email: "atdevv@gmail.com"))
 }

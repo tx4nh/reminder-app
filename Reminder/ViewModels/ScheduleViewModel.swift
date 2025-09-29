@@ -1,6 +1,5 @@
 import Foundation
 
-@MainActor
 @Observable
 class ScheduleViewModel{
     var scheduleView: [Schedule] = []

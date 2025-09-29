@@ -5,11 +5,7 @@ struct EventView: View {
     @State private var selectedDate = Date()
     @State private var showingYearlyEventForm = false
     @State private var showingWeeklyEventForm = false
-    @State private var showPopover = false
-
     @State private var eventModelView = EventViewModel()
-    @State private var yearlyEvents: [Event] = []
-    @State private var weeklyEvents: [Event] = []
 
     var body: some View {
         NavigationView {
@@ -19,9 +15,9 @@ struct EventView: View {
                         EventItemView(appUser: appUser, event: event, type: 1)
                     }
                     
-                    Button(action: {
+                    Button{
                         showingYearlyEventForm = true
-                    }) {
+                    } label: {
                         HStack {
                             Image(systemName: "plus.circle")
                                 .foregroundColor(.blue)
@@ -39,9 +35,9 @@ struct EventView: View {
                         EventItemView(appUser: appUser, event: event, type: 2)
                     }
                     
-                    Button(action: {
+                    Button{
                         showingWeeklyEventForm = true
-                    }) {
+                    } label: {
                         HStack {
                             Image(systemName: "plus.circle")
                                 .foregroundColor(.blue)
@@ -57,10 +53,17 @@ struct EventView: View {
             .navigationTitle("event_text")
             .navigationBarTitleDisplayMode(.automatic)
             .sheet(isPresented: $showingYearlyEventForm) {
-                AddYearlyEventView(events: $yearlyEvents)
+                AddYearlyEventView(appUser: appUser)
             }
-            .sheet(isPresented: $showingWeeklyEventForm) {
-                AddWeeklyEventView(events: $weeklyEvents)
+//            .sheet(isPresented: $showingWeeklyEventForm) {
+//                AddWeeklyEventView(appUser: appUser)
+//            }
+            .refreshable {
+                do{
+                    try await eventModelView.fetchEvent(for: appUser.uid)
+                } catch{
+                    print(error.localizedDescription)
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ class EventManger{
             "user_uid",
             value: uid
         ).order(
-            "time",
+            "event_date",
             ascending: true
         ).execute().value
         return events

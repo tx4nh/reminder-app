@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 
 struct AddWeeklyEventView: View {
+    let appUser: AppUser
     @Binding var events: [Event]
     @Environment(\.dismiss) private var dismiss
     
@@ -112,5 +113,11 @@ struct AddWeeklyEventView: View {
 }
 
 #Preview {
-    AddWeeklyEventView(events: .constant([]))
+    AddWeeklyEventView(
+        appUser: .init(
+            uid: "2311",
+            email: "Atdevv@gmail.com"
+        ),
+        events: .constant([])
+    )
 }

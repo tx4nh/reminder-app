@@ -32,13 +32,6 @@ struct ScheduleView: View {
                         .listRowBackground(Color.clear)
                     }
                     .listStyle(.plain)
-                    .refreshable {
-                        do {
-                            try await viewModel.fetchSchedule(for: appUser.uid)
-                        } catch {
-                            print("DEBUG: Failed to refresh schedule: \(error)")
-                        }
-                    }
                 }
             }
             .navigationBarHidden(true)

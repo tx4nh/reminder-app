@@ -54,7 +54,15 @@ struct EventItemView: View {
         }
         .alert("confirm_delete", isPresented: $showDeleteAlert){
             Button("cancel_text", role: .cancel) { }
-            Button("delete_text", role: .destructive) { }
+            Button("delete_text", role: .destructive) {
+                Task{
+                    do{
+                        try await eventViewModel.deleteEvent(title: event.title, for: appUser.uid)
+                    } catch {
+                        print("Error Delete")
+                    }
+                }
+            }
         } message: {
             Text("are_you_sure_delete")
         }
@@ -68,5 +76,19 @@ struct EventItemView: View {
 }
 
 #Preview {
-    EventItemView(appUser: .init(uid: "2311", email: "atdevv@gmail.com"), event: Event(id: nil, userID: "23112005", title: "Dinh Tuan Anh", eventDate: Date(), eventType: "yearly", repeatDay: nil), type: 1)
+    EventItemView(
+        appUser: .init(
+            uid: "2311",
+            email: "atdevv@gmail.com"
+        ),
+        event: Event(
+            id: nil,
+            userID: "23112005",
+            title: "Dinh Tuan Anh",
+            eventDateString: "23/11/2005",
+            eventType: "yearly",
+            repeatDay: nil
+        ),
+        type: 2
+    )
 }
