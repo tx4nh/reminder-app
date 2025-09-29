@@ -32,6 +32,13 @@ struct ScheduleView: View {
                         .listRowBackground(Color.clear)
                     }
                     .listStyle(.plain)
+                    .refreshable {
+                        do{
+                            try await viewModel.fetchSchedule(for: appUser.uid)
+                        } catch{
+                            print("Error fetch")
+                        }
+                    }
                 }
             }
             .navigationBarHidden(true)

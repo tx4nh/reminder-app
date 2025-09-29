@@ -3,7 +3,15 @@ import Swift
 
 @Observable
 class EventViewModel{
-    var eventView: [Event] = []
+    var allEvents: [Event] = []
+        
+    var yearlyEvents: [Event] {
+        allEvents.filter { $0.eventType == "yearly" }
+    }
+    
+    var weeklyEvents: [Event] {
+        allEvents.filter { $0.eventType == "weekly" }
+    }
     
     func insertEvent(user_uid: String, title: String, event_date: Date, event_type: String) async throws {
         let event = Event(
@@ -15,12 +23,11 @@ class EventViewModel{
             repeatDay: nil
         )
         try await EventManger.shared.insertEvent(event: event)
-        eventView.append(event)
+        allEvents.append(event)
     }
     
-    func fetchEvent(for uid: String) async throws {
-        let event: [Event] = try await EventManger.shared.fetchEvent(for: uid)
-        self.eventView = event
+    func fetchAllEvents(for uid: String) async throws {
+        self.allEvents = try await EventManger.shared.fetchEvent(for: uid)
     }
     
     func deleteEvent(title: String, for uid: String) async throws {

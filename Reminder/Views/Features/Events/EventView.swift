@@ -6,12 +6,17 @@ struct EventView: View {
     @State private var showingYearlyEventForm = false
     @State private var showingWeeklyEventForm = false
     @State private var eventModelView = EventViewModel()
+    
+    private let types = [
+        1: "yearly",
+        2: "weekly"
+    ]
 
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    ForEach(eventModelView.eventView) { event in
+                    ForEach(eventModelView.yearlyEvents) { event in
                         EventItemView(appUser: appUser, event: event, type: 1)
                     }
                     
@@ -31,7 +36,7 @@ struct EventView: View {
                 .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
 
                 Section {
-                    ForEach(eventModelView.eventView) { event in
+                    ForEach(eventModelView.weeklyEvents) { event in
                         EventItemView(appUser: appUser, event: event, type: 2)
                     }
                     
@@ -58,17 +63,24 @@ struct EventView: View {
 //            .sheet(isPresented: $showingWeeklyEventForm) {
 //                AddWeeklyEventView(appUser: appUser)
 //            }
-            .refreshable {
-                do{
-                    try await eventModelView.fetchEvent(for: appUser.uid)
-                } catch{
-                    print(error.localizedDescription)
-                }
+        }
+        .task {
+            do{
+                try await eventModelView.fetchAllEvents(for: appUser.uid)
+            } catch{
+                print(error.localizedDescription)
+            }
+        }
+        .refreshable {
+            do{
+                try await eventModelView.fetchAllEvents(for: appUser.uid)
+            } catch{
+                print(error.localizedDescription)
             }
         }
     }
 }
 
 #Preview {
-    EventView(appUser: AppUser(uid: "2311", email: "atdevv@gmail.com"))
+    EventView(appUser: .init(uid: "2311", email: "atdevv@gmail.com"))
 }
