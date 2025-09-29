@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct AddWeeklyEventView: View {
-    @Binding var events: [WeeklyEvent]
+    @Binding var events: [Event]
     @Environment(\.dismiss) private var dismiss
     
     @State private var title = ""

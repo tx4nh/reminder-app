@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct AddYearlyEventView: View {
-    @Binding var events: [YearlyEvent]
+    @Binding var events: [Event]
     @Environment(\.dismiss) private var dismiss
     @State private var showPopover = false
 

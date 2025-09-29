@@ -11,7 +11,7 @@ struct MainTabView: View {
             }
             
             Tab("event_text", systemImage: "calendar.badge.plus"){
-                EventView()
+                EventView(appUser: appUser)
             }
             
             Tab("setting_text", systemImage: "gearshape.fill") {

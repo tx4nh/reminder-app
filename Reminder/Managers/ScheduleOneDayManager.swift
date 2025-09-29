@@ -1,7 +1,7 @@
 import Foundation
 
-class DatabaseManager{
-    static let shared = DatabaseManager()
+class ScheduleOneDayManager{
+    static let shared = ScheduleOneDayManager()
     
     func insertSchedule(schedule: Schedule) async throws {
         let response = try await supabase.from("schedules").insert(schedule).execute()

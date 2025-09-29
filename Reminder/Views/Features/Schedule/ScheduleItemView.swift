@@ -5,7 +5,7 @@ struct ScheduleItemView: View {
     let colorIndex: Int
     let appUser: AppUser
     var index = 0
-    @State private var viewModel = ScheduleViewModel()
+    @State private var scheduleViewModel = ScheduleViewModel()
     @State private var showDeleteAlert: Bool = false
 
     private let arrColors: [Color] = [
@@ -89,7 +89,7 @@ struct ScheduleItemView: View {
             Button("delete_text", role: .destructive) {
                 Task{
                     do{
-                        try await viewModel.deleteSchedule(text: schedule.text, for: appUser.uid)
+                        try await scheduleViewModel.deleteSchedule(text: schedule.text, for: appUser.uid)
                     } catch {
                         print("Error Delete")
                     }

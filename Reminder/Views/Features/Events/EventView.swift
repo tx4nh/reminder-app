@@ -1,31 +1,23 @@
 import SwiftUI
 
 struct EventView: View {
+    let appUser: AppUser
     @State private var selectedDate = Date()
     @State private var showingYearlyEventForm = false
     @State private var showingWeeklyEventForm = false
     @State private var showPopover = false
 
-    @State private var yearlyEvents: [YearlyEvent] = []
-    @State private var weeklyEvents: [WeeklyEvent] = []
+    @State private var eventModelView = EventViewModel()
+    @State private var yearlyEvents: [Event] = []
+    @State private var weeklyEvents: [Event] = []
 
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    ForEach(yearlyEvents) { event in
-                        HStack {
-                            Text(event.title)
-                                .font(.system(size: 16, weight: .medium))
-                            
-                            Spacer()
-                            
-                            Text(event.formattedDate)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
+                    ForEach(eventModelView.eventView) { event in
+                        EventItemView(appUser: appUser, event: event, type: 1)
                     }
-                    .onDelete(perform: deleteYearlyEvent)
                     
                     Button(action: {
                         showingYearlyEventForm = true
@@ -43,19 +35,9 @@ struct EventView: View {
                 .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
 
                 Section {
-                    ForEach(weeklyEvents) { event in
-                        HStack {
-                            Text(event.title)
-                                .font(.system(size: 16, weight: .medium))
-                            
-                            Spacer()
-                            
-                            Text(event.formattedDayOfWeek)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
+                    ForEach(eventModelView.eventView) { event in
+                        EventItemView(appUser: appUser, event: event, type: 2)
                     }
-                    .onDelete(perform: deleteWeeklyEvent)
                     
                     Button(action: {
                         showingWeeklyEventForm = true
@@ -82,16 +64,8 @@ struct EventView: View {
             }
         }
     }
-
-    private func deleteYearlyEvent(at offsets: IndexSet) {
-        yearlyEvents.remove(atOffsets: offsets)
-    }
-
-    private func deleteWeeklyEvent(at offsets: IndexSet) {
-        weeklyEvents.remove(atOffsets: offsets)
-    }
 }
 
 #Preview {
-    EventView()
+    EventView(appUser: AppUser(uid: "2311", email: "atdevv@gmail.com"))
 }

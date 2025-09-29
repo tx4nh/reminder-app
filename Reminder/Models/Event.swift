@@ -1,12 +1,12 @@
 import Foundation
 
-struct Event: Codable {
+struct Event: Codable, Identifiable {
     let id: UUID?
-    let userID: UUID
-    let title: String
-    let eventDate: Date
-    let eventType: String
-    let repeatDay: [Int]?
+    let userID: String
+    var title: String
+    var eventDate: Date
+    var eventType: String
+    var repeatDay: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
