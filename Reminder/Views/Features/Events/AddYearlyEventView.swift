@@ -81,7 +81,7 @@ struct AddYearlyEventView: View {
                 .cornerRadius(8)
                 
                 Button("save_text") {
-                    if !title.trimmingCharacters(in: .whitespaces).isEmpty {
+                    if isTitleValid {
                             addEvent()
                             dismiss()
                        }
@@ -91,8 +91,8 @@ struct AddYearlyEventView: View {
                 .background(.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
-                .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
-                .opacity(title.trimmingCharacters(in: .whitespaces).isEmpty ? 0.6 : 1)
+                .disabled(!isTitleValid)
+                .opacity(isTitleValid ? 1 : 0.6)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
@@ -100,6 +100,10 @@ struct AddYearlyEventView: View {
         .presentationDetents([.height(370)])
     }
     
+    private var isTitleValid: Bool {
+        !title.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+
     private var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM"
@@ -123,7 +127,8 @@ struct AddYearlyEventView: View {
                         user_uid: appUser.uid,
                         title: title,
                         event_date: extractDayMonth(),
-                        event_type: "yearly"
+                        event_type: "yearly",
+                        repeat_day: nil
                     )
             } catch{
                 print(

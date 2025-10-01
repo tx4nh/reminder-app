@@ -13,14 +13,14 @@ class EventViewModel{
         allEvents.filter { $0.eventType == "weekly" }
     }
     
-    func insertEvent(user_uid: String, title: String, event_date: Date, event_type: String) async throws {
+    func insertEvent(user_uid: String, title: String, event_date: Date, event_type: String, repeat_day: Int?) async throws {
         let event = Event(
             id: nil,
             userID: user_uid,
             title: title,
             eventDateString: ISO8601DateFormatter().string(from: event_date),
             eventType: event_type,
-            repeatDay: nil
+            repeatDay: repeat_day
         )
         try await EventManger.shared.insertEvent(event: event)
         allEvents.append(event)

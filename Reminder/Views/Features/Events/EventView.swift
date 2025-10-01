@@ -6,11 +6,6 @@ struct EventView: View {
     @State private var showingYearlyEventForm = false
     @State private var showingWeeklyEventForm = false
     @State private var eventModelView = EventViewModel()
-    
-    private let types = [
-        1: "yearly",
-        2: "weekly"
-    ]
 
     var body: some View {
         NavigationView {
@@ -60,9 +55,9 @@ struct EventView: View {
             .sheet(isPresented: $showingYearlyEventForm) {
                 AddYearlyEventView(appUser: appUser)
             }
-//            .sheet(isPresented: $showingWeeklyEventForm) {
-//                AddWeeklyEventView(appUser: appUser)
-//            }
+            .sheet(isPresented: $showingWeeklyEventForm) {
+                AddWeeklyEventView(appUser: appUser)
+            }
         }
         .task {
             do{

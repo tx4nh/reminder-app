@@ -3,26 +3,21 @@ import SwiftUI
 
 struct AddWeeklyEventView: View {
     let appUser: AppUser
-    @Binding var events: [Event]
     @Environment(\.dismiss) private var dismiss
-    
+    @State private var eventViewModel = EventViewModel()
     @State private var title = ""
     @State private var selectedDayOfWeek = 2
-    
+
     private let weekDays = [
-        "Chủ Nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5",  "Thứ 6", "Thứ 7"
+        "Chủ nhật",
+        "Thứ 2",
+        "Thứ 3",
+        "Thứ 4",
+        "Thứ 5",
+        "Thứ 6",
+        "Thứ 7"
     ]
-    
-    private let weekdayNames = [
-        1: "Chủ nhật",
-        2: "Thứ 2",
-        3: "Thứ 3",
-        4: "Thứ 4",
-        5: "Thứ 5",
-        6: "Thứ 6",
-        7: "Thứ 7"
-    ]
-    
+
     var body: some View {
         VStack(spacing: 20) {
             RoundedRectangle(cornerRadius: 2)
@@ -42,6 +37,7 @@ struct AddWeeklyEventView: View {
                         .foregroundColor(.secondary)
                     
                     TextField("enter_event_name", text: $title)
+                        .autocorrectionDisabled()
                         .frame(height: 40)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
@@ -61,7 +57,7 @@ struct AddWeeklyEventView: View {
                         .foregroundColor(.secondary)
                     
                     HStack {
-                        Text(weekDays[selectedDayOfWeek - 1])
+                        Text(weekDays[selectedDayOfWeek])
                             .font(.system(size: 16))
                             .foregroundColor(.primary)
 
@@ -69,7 +65,7 @@ struct AddWeeklyEventView: View {
 
                         Picker("Ngày trong tuần", selection: $selectedDayOfWeek) {
                             ForEach(weekDays.indices, id: \.self) { index in
-                                Text(weekDays[index]).tag(index + 1)
+                                Text(weekDays[index]).tag(index)
                             }
                         }
                     }
@@ -97,18 +93,44 @@ struct AddWeeklyEventView: View {
                 .cornerRadius(8)
                 
                 Button("save_text") {
-                    dismiss()
+                    if isTitleValid {
+                            addEvent()
+                            dismiss()
+                       }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 12)
                 .background(.blue)
                 .foregroundColor(.white)
                 .cornerRadius(8)
+                .disabled(!isTitleValid)
+                .opacity(isTitleValid ? 1 : 0.6)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 20)
         }
         .presentationDetents([.height(370)])
+    }
+    
+    private var isTitleValid: Bool {
+        !title.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+    
+    private func addEvent() {
+        Task{
+            do{
+                try await eventViewModel
+                    .insertEvent(
+                        user_uid: appUser.uid,
+                        title: title,
+                        event_date: Date(),
+                        event_type: "weekly",
+                        repeat_day: selectedDayOfWeek + 1
+                    )
+            } catch{
+                print("Error with add event: \(error.localizedDescription)")
+            }
+        }
     }
 }
 
@@ -118,6 +140,5 @@ struct AddWeeklyEventView: View {
             uid: "2311",
             email: "Atdevv@gmail.com"
         ),
-        events: .constant([])
     )
 }
