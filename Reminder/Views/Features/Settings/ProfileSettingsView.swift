@@ -191,6 +191,6 @@ struct ProfileSettingsView: View {
 }
 
 #Preview {
-    ProfileSettingsView(appUser: .init(uid: "2311", email: "anhhihi@gmai.com"), userName: UserNameViewModel())
+    ProfileSettingsView(appUser: .init(uid: "2311", email: "anhhihi@gmai.com"), userName: UserNameViewModel(userID: "2311"))
         .environment(AppLanguageManager())
 }

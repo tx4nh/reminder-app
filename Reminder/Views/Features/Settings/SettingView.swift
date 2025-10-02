@@ -5,12 +5,13 @@ struct SettingView: View {
     let onSignOut: () -> Void
     @Environment(ThemeViewModel.self) private var themeViewModel
     @Environment(AppLanguageManager.self) private var appLanguage
-    @Environment(UserNameViewModel.self) private var userName
     @State private var showSignOutAlert: Bool = false
     @State private var isLoading: Bool = false
 
     var body: some View {
         @Bindable var themeViewModel = themeViewModel
+        let userName = UserNameViewModel(userID: appUser.uid)
+
         if isLoading {
             LoadingView()
         } else {

@@ -1,6 +1,6 @@
-import Foundation
+import SwiftUI
 
-struct AppUser{
+struct AppUser {
     let uid: String
     let email: String?
 }
