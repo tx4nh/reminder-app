@@ -16,9 +16,12 @@ struct Event: Codable, Identifiable {
         case eventType = "event_type"
         case repeatDay = "repeat_day"
     }
-    
-    var eventDate: Date {
-        let formatter = ISO8601DateFormatter()
-        return formatter.date(from: eventDateString) ?? Date()
+
+    var eventDate: String {
+        let components = eventDateString.split(separator: "-")
+        if components.count >= 3 {
+            return "\(components[2])-\(components[1])"
+        }
+        return eventDateString
     }
 }

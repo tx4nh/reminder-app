@@ -131,10 +131,7 @@ struct AddYearlyEventView: View {
                         repeat_day: nil
                     )
             } catch{
-                print(
-                    "Error with add event"
-                )
-                print(error.localizedDescription)
+                print("Error with add event: \(error.localizedDescription)")
             }
         }
     }

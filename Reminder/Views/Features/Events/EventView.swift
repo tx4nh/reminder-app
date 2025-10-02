@@ -2,7 +2,6 @@ import SwiftUI
 
 struct EventView: View {
     let appUser: AppUser
-    @State private var selectedDate = Date()
     @State private var showingYearlyEventForm = false
     @State private var showingWeeklyEventForm = false
     @State private var eventModelView = EventViewModel()

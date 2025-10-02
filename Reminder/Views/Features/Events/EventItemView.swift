@@ -3,6 +3,7 @@ import SwiftUI
 struct EventItemView: View {
     let appUser: AppUser
     let event: Event
+    let date = Date()
     var type: Int
     @State private var selectedDate = Date()
     @State private var eventViewModel = EventViewModel()
@@ -26,7 +27,7 @@ struct EventItemView: View {
             Spacer()
             
             if type == 1 {
-                Text(formattedDate)
+                Text(event.eventDate)
                     .font(.caption)
                     .foregroundColor(.secondary)
             } else {
@@ -66,12 +67,6 @@ struct EventItemView: View {
         } message: {
             Text("are_you_sure_delete")
         }
-    }
-
-    private var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM"
-        return formatter.string(from: event.eventDate)
     }
 }
 

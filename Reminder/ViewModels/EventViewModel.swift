@@ -12,13 +12,20 @@ class EventViewModel{
     var weeklyEvents: [Event] {
         allEvents.filter { $0.eventType == "weekly" }
     }
-    
+
+    private func formattedDate(from dateValue: Date) -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.current
+        return formatter.string(from: dateValue)
+    }
+
     func insertEvent(user_uid: String, title: String, event_date: Date, event_type: String, repeat_day: Int?) async throws {
         let event = Event(
             id: nil,
             userID: user_uid,
             title: title,
-            eventDateString: ISO8601DateFormatter().string(from: event_date),
+            eventDateString: formattedDate(from: event_date),
             eventType: event_type,
             repeatDay: repeat_day
         )
