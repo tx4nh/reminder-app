@@ -3,6 +3,7 @@ import SwiftUI
 struct RegisterView: View {
     @State var email: String = ""
     @State var password: String = ""
+    @State var showSuccessAlert = false
     
     @Binding var appUser: AppUser?
     @Bindable var viewModel: SignInViewModel
@@ -31,16 +32,7 @@ struct RegisterView: View {
             SecureFieldView(password: $password)
             
             Button {
-                Task{
-                    do{
-                        let user = try await viewModel.registerNewUserWithEmail(email: email, password: password)
-                        self.appUser = user
-                        dismiss.callAsFunction()
-                    }
-                    catch{
-                        print("Error")
-                    }
-                }
+                registerAPI()
             } label: {
                 Text("register_text")
                     .padding()
@@ -56,6 +48,24 @@ struct RegisterView: View {
             Spacer()
         }
         .padding()
+        .alert(LocalizedStringKey("success_register"), isPresented: $showSuccessAlert) {
+            Button("OK") {
+                dismiss()
+            }
+        }
+    }
+    
+    private func registerAPI() {
+        Task{
+            do{
+                let user = try await viewModel.registerNewUserWithEmail(email: email, password: password)
+                self.appUser = user
+                showSuccessAlert = true
+            }
+            catch{
+                print("Error")
+            }
+        }
     }
 }
 

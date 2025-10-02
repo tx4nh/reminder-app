@@ -32,7 +32,7 @@ struct DateView: View {
                 .stroke(isToday ? Color.blue : isSelected ? Color.blue : Color.gray, lineWidth: 2)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(isToday ? Color.blue : isSelected ? .blue.opacity(0.3) : .white)
+                        .fill(isToday ? Color.blue : isSelected ? .blue.opacity(0.3) : Color(uiColor: .systemBackground))
                 )
                 .frame(width: 50, height: 60)
 

@@ -968,6 +968,22 @@
         }
       }
     },
+    "success_register" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Success register"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đăng kí thành công"
+          }
+        }
+      }
+    },
     "support_text" : {
       "localizations" : {
         "en" : {
