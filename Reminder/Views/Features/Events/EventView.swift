@@ -2,6 +2,7 @@ import SwiftUI
 
 struct EventView: View {
     let appUser: AppUser
+    @State private var isLoading = false
     @State private var showingYearlyEventForm = false
     @State private var showingWeeklyEventForm = false
     @State private var eventModelView = EventViewModel()
@@ -28,7 +29,7 @@ struct EventView: View {
                     Text("event_every_year")
                 }
                 .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-
+                
                 Section {
                     ForEach(eventModelView.weeklyEvents) { event in
                         EventItemView(appUser: appUser, event: event, type: 2)
@@ -57,20 +58,25 @@ struct EventView: View {
             .sheet(isPresented: $showingWeeklyEventForm) {
                 AddWeeklyEventView(appUser: appUser)
             }
+            .overlay(
+                ButtonLoadData {
+                    await fetchData()
+                }
+                    .padding(.vertical, 30)
+                    .padding(.trailing, 30),
+                alignment: .bottomTrailing
+            )
         }
         .task {
-            do{
-                try await eventModelView.fetchAllEvents(for: appUser.uid)
-            } catch{
-                print(error.localizedDescription)
-            }
+            await fetchData()
         }
-        .refreshable {
-            do{
-                try await eventModelView.fetchAllEvents(for: appUser.uid)
-            } catch{
-                print(error.localizedDescription)
-            }
+    }
+
+    private func fetchData () async {
+        do{
+            try await eventModelView.fetchAllEvents(for: appUser.uid)
+        } catch{
+            print(error.localizedDescription)
         }
     }
 }
