@@ -5,37 +5,7 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                
-                VStack(spacing: 12) {
-                    HStack(spacing: 12) {
-                        Image(systemName: "calendar")
-                            .font(.system(size: 36, weight: .semibold))
-                            .foregroundStyle(
-                                LinearGradient(
-                                    colors: [.blue, .purple],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                            )
-                        
-                        Text("today_schedule")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundStyle(
-                                LinearGradient(
-                                    colors: [.primary, .secondary],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                    }
-                }
-                .padding(.top, 30)
-                .padding(.bottom, 20)
-                
-                Spacer()
-                
+            VStack(spacing: 0) {                
                 DateListView()
                     .padding(.horizontal, 5)
                 

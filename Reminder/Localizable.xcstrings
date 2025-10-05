@@ -588,6 +588,22 @@
         }
       }
     },
+    "intended_schedule" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intended schedule"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lịch trình dự kiến"
+          }
+        }
+      }
+    },
     "job_content" : {
       "localizations" : {
         "en" : {
@@ -782,6 +798,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hồ sơ"
+          }
+        }
+      }
+    },
+    "previous_schedule" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous schedule"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lịch trình đã qua"
           }
         }
       }
