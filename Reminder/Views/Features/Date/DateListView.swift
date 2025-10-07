@@ -2,7 +2,7 @@ import SwiftUI
 
 struct DateListView: View {
     @State private var selectedIndex: Int = 0
-    @State private var isToday: Int = 1
+    @State private var isToday: Int = 0
     
     private var isText: LocalizedStringKey{
         if isToday == 0 {

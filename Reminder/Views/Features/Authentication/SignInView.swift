@@ -8,6 +8,9 @@ struct SignInView: View {
     @State private var viewModel = SignInViewModel()
     @State private var isLoading: Bool = false
     
+    @State private var errorMessage: String = ""
+    @State private var showError: Bool = false
+    
     var body: some View {
         if isLoading {
             LoadingView()
@@ -36,22 +39,30 @@ struct SignInView: View {
                         .aspectRatio(contentMode: .fit)
                     
                     Spacer()
+                    
                     TextFieldView(email: $email)
                         .padding(.bottom, 10)
+                        .onChange(of: email) { _, _ in
+                            clearError()
+                        }
+
                     SecureFieldView(password: $password)
+                        .onChange(of: password) { _, _ in
+                            clearError()
+                        }
+                    
+                    if showError {
+                        Text(errorMessage)
+                            .font(.caption)
+                            .foregroundColor(.red)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                            .padding(.top, 8)
+                            .transition(.opacity)
+                    }
                     
                     Button {
-                        isLoading = true
-                        Task {
-                            do {
-                                let user = try await viewModel.signInWithEmail(email: email, password: password)
-                                self.appUser = user
-                                isLoading = false
-                            } catch {
-                                isLoading = false
-                                print("error")
-                            }
-                        }
+                        handleSignIn()
                     } label: {
                         Text("sign_in_text")
                             .padding()
@@ -86,6 +97,38 @@ struct SignInView: View {
                     Spacer()
                 }
                 .padding()
+            }
+        }
+    }
+
+    private func handleSignIn() {
+        isLoading = true
+        
+        Task { @MainActor in
+            do {
+                let user = try await viewModel.signInWithEmail(email: email, password: password)
+                self.appUser = user
+                self.isLoading = false
+            } catch let error as AuthError {
+                self.isLoading = false
+                self.errorMessage = error.errorDescription ?? "Đã xảy ra lỗi"
+                withAnimation {
+                    self.showError = true
+                }
+            } catch {
+                self.isLoading = false
+                self.errorMessage = "Email không tồn tại hoặc mật khẩu không khớp"
+                withAnimation {
+                    self.showError = true
+                }
+            }
+        }
+    }
+
+    private func clearError() {
+        if showError {
+            withAnimation {
+                showError = false
             }
         }
     }
