@@ -62,29 +62,9 @@ struct NotificationSettingsView: View {
                 .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 
                 Section{
-                    ToggleRowView(
-                        icon: "clock",
-                        title: "15 phút trước",
-                        subtitle: "Nhắc nhở 15 phút trước sự kiện",
-                        iconColor: .cyan,
-                        isOn: $reminderBefore15Min
-                    )
-                    
-                    ToggleRowView(
-                        icon: "clock",
-                        title: "1 giờ trước",
-                        subtitle: "Nhắc nhở 1 giờ trước sự kiện",
-                        iconColor: .indigo,
-                        isOn: $reminderBefore1Hour
-                    )
-                    
-                    ToggleRowView(
-                        icon: "clock",
-                        title: "1 ngày trước",
-                        subtitle: "Nhắc nhở 1 ngày trước sự kiện",
-                        iconColor: .pink,
-                        isOn: $reminderBefore1Day
-                    )
+                    TimeNotification(eventName: "Sự kiện ngày", eventTime: "1 giờ")
+                    TimeNotification(eventName: "Sự kiện tuần", eventTime: "1 ngày")
+                    TimeNotification(eventName: "Sự kiện năm", eventTime: "1 ngày")
                 } header: {
                     Text("Thời gian nhắc nhở")
                 }

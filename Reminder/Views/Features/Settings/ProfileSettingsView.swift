@@ -172,9 +172,6 @@ struct ProfileSettingsView: View {
                 }
             }
         }
-        .sheet(isPresented: $showAvatarPicker) {
-            AvatarPickerView(selectedAvatar: $selectedAvatar)
-        }
         .onAppear {
             loadUserData()
         }
