@@ -556,6 +556,9 @@
         }
       }
     },
+    "general_notice" : {
+
+    },
     "hello_text" : {
       "localizations" : {
         "en" : {
@@ -866,6 +869,9 @@
         }
       }
     },
+    "reminder_time" : {
+
+    },
     "Request Permission" : {
 
     },
@@ -889,6 +895,7 @@
 
     },
     "select_avatar" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1048,16 +1055,10 @@
         }
       }
     },
-    "Thời gian nhắc nhở" : {
-
-    },
-    "Thông báo chung" : {
+    "test_notice" : {
 
     },
     "Thông tin kỹ thuật" : {
-
-    },
-    "Thử thông báo" : {
 
     },
     "Tính năng nổi bật" : {

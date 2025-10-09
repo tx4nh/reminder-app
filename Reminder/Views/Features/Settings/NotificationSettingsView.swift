@@ -6,14 +6,21 @@ struct NotificationSettingsView: View {
     @State private var soundEnabled = true
     @State private var vibrationEnabled = true
     @State private var badgeEnabled = true
-    @State private var reminderBefore15Min = true
-    @State private var reminderBefore1Hour = false
-    @State private var reminderBefore1Day = false
     @State private var selectedSound = "Mặc định"
+
+    @State private var dailyEventTime = "1 giờ"
+    @State private var weeklyEventTime = "1 ngày"
+    @State private var yearlyEventTime = "1 ngày"
+    
     @State private var showSoundPicker = false
+    
+    @State private var activeTimePicker: EventType?
     @State private var isPressed = false
     
-    let soundOptions = ["Mặc định", "Chuông", "Báo thức", "Nhẹ nhàng", "Sôi động", "Tắt"]
+    enum EventType: Identifiable {
+        case daily, weekly, yearly
+        var id: Self { self }
+    }
     
     var body: some View {
         NavigationView {
@@ -43,7 +50,7 @@ struct NotificationSettingsView: View {
                         isOn: $vibrationEnabled
                     )
                 } header: {
-                    Text("Thông báo chung")
+                    Text("general_notice")
                 }
                 
                 Section {
@@ -61,15 +68,22 @@ struct NotificationSettingsView: View {
                 }
                 .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 
-                Section{
-                    TimeNotification(eventName: "Sự kiện ngày", eventTime: "1 giờ")
-                    TimeNotification(eventName: "Sự kiện tuần", eventTime: "1 ngày")
-                    TimeNotification(eventName: "Sự kiện năm", eventTime: "1 ngày")
+                Section {
+                    TimeNotification(eventName: "Sự kiện ngày", selectedTime:$dailyEventTime) {
+                        activeTimePicker = .daily
+                    }
+                    TimeNotification(eventName: "Sự kiện tuần", selectedTime: $weeklyEventTime) {
+                        activeTimePicker = .weekly
+                    }
+                    TimeNotification(eventName: "Sự kiện năm", selectedTime: $yearlyEventTime) {
+                        activeTimePicker = .yearly
+                    }
                 } header: {
-                    Text("Thời gian nhắc nhở")
+                    Text("reminder_time")
                 }
-                
-                VStack{
+                .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 16))
+
+                VStack {
                     Button {
                         isPressed.toggle()
                         testNotification()
@@ -77,7 +91,7 @@ struct NotificationSettingsView: View {
                         HStack(spacing: 8) {
                             Image(systemName: "bell.and.waves.left.and.right")
                                 .font(.system(size: 16, weight: .medium))
-                            Text("Thử thông báo")
+                            Text("test_notice")
                                 .font(.system(size: 16, weight: .medium))
                         }
                         .frame(maxWidth: .infinity)
@@ -120,6 +134,16 @@ struct NotificationSettingsView: View {
         .sheet(isPresented: $showSoundPicker) {
             SoundPickerView(selectedSound: $selectedSound)
         }
+        .sheet(item: $activeTimePicker) { eventType in
+            switch eventType {
+            case .daily:
+                TimePickerView(selectedTime: $dailyEventTime)
+            case .weekly:
+                TimePickerView(selectedTime: $weeklyEventTime)
+            case .yearly:
+                TimePickerView(selectedTime: $yearlyEventTime)
+            }
+        }
     }
     
     private func testNotification() {
@@ -128,73 +152,8 @@ struct NotificationSettingsView: View {
     
     private func saveSettings() {
         print("Saving notification settings...")
+        print("Daily: \(dailyEventTime), Weekly: \(weeklyEventTime), Yearly: \(yearlyEventTime)")
         dismiss()
-    }
-}
-
-struct SectionHeader: View {
-    let title: String
-    
-    var body: some View {
-        Text(title)
-            .font(.system(size: 18, weight: .semibold))
-            .foregroundColor(.primary)
-            .padding(.horizontal, 4)
-    }
-}
-
-struct SoundPickerView: View {
-    @Environment(\.dismiss) private var dismiss
-    @Binding var selectedSound: String
-    @State private var tempSelection: String
-    
-    let soundOptions = ["Mặc định", "Chuông", "Báo thức", "Nhẹ nhàng", "Sôi động", "Tắt"]
-    
-    init(selectedSound: Binding<String>) {
-        self._selectedSound = selectedSound
-        self._tempSelection = State(initialValue: selectedSound.wrappedValue)
-    }
-    
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(soundOptions, id: \.self) { sound in
-                    HStack {
-                        Text(sound)
-                            .font(.system(size: 16))
-                        
-                        Spacer()
-                        
-                        if tempSelection == sound {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.accentColor)
-                                .font(.system(size: 16, weight: .semibold))
-                        }
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        tempSelection = sound
-                    }
-                }
-            }
-            .navigationTitle("sound_text")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("cancel_text") {
-                        dismiss()
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("select_text") {
-                        selectedSound = tempSelection
-                        dismiss()
-                    }
-                    .fontWeight(.semibold)
-                }
-            }
-        }
     }
 }
 
