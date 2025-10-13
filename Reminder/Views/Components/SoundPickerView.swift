@@ -5,8 +5,6 @@ struct SoundPickerView: View {
     @Binding var selectedSound: String
     @State private var tempSelection: String
     
-    let soundOptions = ["Mặc định", "Chuông", "Báo thức", "Nhẹ nhàng", "Sôi động", "Tắt"]
-    
     init(selectedSound: Binding<String>) {
         self._selectedSound = selectedSound
         self._tempSelection = State(initialValue: selectedSound.wrappedValue)
@@ -15,14 +13,17 @@ struct SoundPickerView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(soundOptions, id: \.self) { sound in
+                ForEach(soundOptions, id: \.name) { sound in
+                    let soundName = sound.name
+                    let soundFile = sound.file
+
                     HStack {
-                        Text(sound)
+                        Text(soundName)
                             .font(.system(size: 16))
                         
                         Spacer()
                         
-                        if tempSelection == sound {
+                        if tempSelection == soundName {
                             Image(systemName: "checkmark")
                                 .foregroundColor(.accentColor)
                                 .font(.system(size: 16, weight: .semibold))
@@ -30,7 +31,8 @@ struct SoundPickerView: View {
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        tempSelection = sound
+                        SoundManeger.shared.playSound(named: soundFile)
+                        tempSelection = soundName
                     }
                 }
             }

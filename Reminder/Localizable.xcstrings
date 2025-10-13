@@ -894,23 +894,6 @@
     "Schedule Notification" : {
 
     },
-    "select_avatar" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select avatar"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chọn ảnh đại diện"
-          }
-        }
-      }
-    },
     "select_text" : {
       "localizations" : {
         "en" : {
