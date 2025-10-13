@@ -396,6 +396,12 @@
     },
     "day_notifica" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notice day"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -556,8 +562,15 @@
         }
       }
     },
-    "general_notice" : {
-
+    "general_text" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chung"
+          }
+        }
+      }
     },
     "hello_text" : {
       "localizations" : {
@@ -870,7 +883,20 @@
       }
     },
     "reminder_time" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder time"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thời gian nhắc nhở"
+          }
+        }
+      }
     },
     "Request Permission" : {
 
@@ -1039,7 +1065,20 @@
       }
     },
     "test_notice" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test notice"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông báo thử"
+          }
+        }
+      }
     },
     "Thông tin kỹ thuật" : {
 

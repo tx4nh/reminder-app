@@ -7,10 +7,16 @@ struct SettingView: View {
     @Environment(AppLanguageManager.self) private var appLanguage
     @State private var showSignOutAlert: Bool = false
     @State private var isLoading: Bool = false
+    @State private var userName: UserNameViewModel
+    
+    init(appUser: AppUser, onSignOut: @escaping () -> Void) {
+        self.appUser = appUser
+        self.onSignOut = onSignOut
+        _userName = State(wrappedValue: UserNameViewModel(userID: appUser.uid))
+    }
 
     var body: some View {
         @Bindable var themeViewModel = themeViewModel
-        let userName = UserNameViewModel(userID: appUser.uid)
 
         if isLoading {
             LoadingView()

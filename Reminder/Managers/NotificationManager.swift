@@ -3,7 +3,13 @@ import UserNotifications
 
 struct NotificationManager: View {
     let appUser: AppUser
-    
+    @State private var userName: UserNameViewModel
+
+    init(appUser: AppUser) {
+        self.appUser = appUser
+        _userName = State(wrappedValue: UserNameViewModel(userID: appUser.uid))
+    }
+
     var body: some View {
         VStack{
             Button {
@@ -20,7 +26,7 @@ struct NotificationManager: View {
             
             Button {
                 let content = UNMutableNotificationContent()
-                content.title = "Xin chào tx4nh!"
+                content.title = "Xin chào \(userName.name)"
                 content.subtitle = "Đây là thông báo ảo"
                 content.sound = UNNotificationSound.default
                 

@@ -50,7 +50,7 @@ struct NotificationSettingsView: View {
                         isOn: $vibrationEnabled
                     )
                 } header: {
-                    Text("general_notice")
+                    Text("general_text")
                 }
                 
                 Section {
@@ -82,36 +82,6 @@ struct NotificationSettingsView: View {
                     Text("reminder_time")
                 }
                 .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 16))
-
-                VStack {
-                    Button {
-                        isPressed.toggle()
-                        testNotification()
-                    } label: {
-                        HStack(spacing: 8) {
-                            Image(systemName: "bell.and.waves.left.and.right")
-                                .font(.system(size: 16, weight: .medium))
-                            Text("test_notice")
-                                .font(.system(size: 16, weight: .medium))
-                        }
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 44)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.accentColor.opacity(0.1))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.accentColor, lineWidth: 1)
-                                )
-                        )
-                        .foregroundColor(.accentColor)
-                        .scaleEffect(isPressed ? 0.95 : 1.0)
-                        .opacity(isPressed ? 0.8 : 1.0)
-                        .animation(.easeInOut(duration: 0.1), value: isPressed)
-                    }
-                }
-                .listRowInsets(EdgeInsets())
-                .listRowBackground(Color.clear)
             }
             .navigationTitle("notification_text")
             .navigationBarTitleDisplayMode(.inline)
@@ -145,11 +115,7 @@ struct NotificationSettingsView: View {
             }
         }
     }
-    
-    private func testNotification() {
-        print("Test notification triggered")
-    }
-    
+
     private func saveSettings() {
         print("Saving notification settings...")
         print("Daily: \(dailyEventTime), Weekly: \(weeklyEventTime), Yearly: \(yearlyEventTime)")
