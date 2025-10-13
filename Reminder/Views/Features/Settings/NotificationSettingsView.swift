@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct NotificationSettingsView: View {
+    let appUser: AppUser
     @Environment(\.dismiss) private var dismiss
     @State private var pushNotificationsEnabled = true
     @State private var soundEnabled = true
@@ -14,8 +15,14 @@ struct NotificationSettingsView: View {
     
     @State private var showSoundPicker = false
     
+    @State private var userName: UserNameViewModel
     @State private var activeTimePicker: EventType?
     @State private var isPressed = false
+    
+    init(appUser: AppUser) {
+        self.appUser = appUser
+        _userName = State(wrappedValue: UserNameViewModel(userID: appUser.uid))
+    }
     
     enum EventType: Identifiable {
         case daily, weekly, yearly
@@ -82,6 +89,35 @@ struct NotificationSettingsView: View {
                     Text("reminder_time")
                 }
                 .listRowInsets(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 16))
+                
+                VStack {
+                    Button {
+                        isPressed.toggle()
+                        testNotification()
+                    } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "bell.and.waves.left.and.right")
+                                .font(.system(size: 16, weight: .medium))
+                            Text("test_notice")
+                                .font(.system(size: 16, weight: .medium))
+                        }
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.accentColor.opacity(0.1))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.accentColor, lineWidth: 1)
+                                )
+                        )
+                        .foregroundColor(.accentColor)
+                        .scaleEffect(isPressed ? 0.95 : 1.0)
+                        .opacity(isPressed ? 0.8 : 1.0)
+                        .animation(.easeInOut(duration: 0.1), value: isPressed)
+                    }
+                }
+                .listRowInsets(EdgeInsets())
             }
             .navigationTitle("notification_text")
             .navigationBarTitleDisplayMode(.inline)
@@ -115,6 +151,14 @@ struct NotificationSettingsView: View {
             }
         }
     }
+    
+    private func testNotification() {
+        NotificationManager.shared.scheduleNotification(
+            title: "Xin chào \(userName.name)",
+            subtitle: "Đây là thông báo ảo",
+            timeInterval: 5
+        )
+    }
 
     private func saveSettings() {
         print("Saving notification settings...")
@@ -124,5 +168,5 @@ struct NotificationSettingsView: View {
 }
 
 #Preview {
-    NotificationSettingsView()
+    NotificationSettingsView(appUser: .init(uid: "2311", email: ""))
 }

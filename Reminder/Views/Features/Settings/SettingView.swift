@@ -87,7 +87,7 @@ struct SettingView: View {
                     
                     Section {
                         NavigationLink{
-                            NotificationSettingsView()
+                            NotificationSettingsView(appUser: appUser)
                                 .navigationBarBackButtonHidden()
                         } label: {
                             SettingRowView(

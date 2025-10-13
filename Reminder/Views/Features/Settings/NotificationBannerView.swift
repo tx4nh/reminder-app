@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NotificationView: View {
+struct NotificationBannerView: View {
     let appUser: AppUser
     @State private var userName: UserNameViewModel
     
@@ -37,5 +37,5 @@ struct NotificationView: View {
 }
 
 #Preview {
-    NotificationView(appUser: .init(uid: "2311", email: ""))
+    NotificationBannerView(appUser: .init(uid: "2311", email: ""))
 }
