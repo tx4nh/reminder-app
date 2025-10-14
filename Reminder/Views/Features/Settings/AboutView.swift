@@ -113,14 +113,14 @@ struct AboutView: View {
                         
                         HStack(spacing: 20) {
                             Button("terms_of_use") {
-                                // TODO: Open terms of service
+                                
                                 print("Terms tapped")
                             }
                             .font(.caption)
                             .foregroundColor(.accentColor)
                             
                             Button("privacy_policy") {
-                                // TODO: Open privacy policy
+                                
                                 print("Privacy tapped")
                             }
                             .font(.caption)

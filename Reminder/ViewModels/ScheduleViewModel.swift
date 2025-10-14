@@ -4,9 +4,7 @@ import Foundation
 class ScheduleViewModel{
     var scheduleView: [Schedule] = []
     
-//    user_uid: String, text: String, time: String, date: String
     func insertSchedule(schedule: Schedule) async throws {
-//        let schedule = Schedule(user_uid: newSchedule.user_uid, text: newSchedule.text, time: newSchedule.time, date: newSchedule.date)
         try await ScheduleOneDayManager.shared.insertSchedule(schedule: schedule)
         scheduleView.append(schedule)
     }

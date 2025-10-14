@@ -1,10 +1,3 @@
-//
-//  ReminderUITests.swift
-//  ReminderUITests
-//
-//  Created by Tuấngg Anhhh on 7/8/25.
-//
-
 import XCTest
 
 final class ReminderUITests: XCTestCase {
