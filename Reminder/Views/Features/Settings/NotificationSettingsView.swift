@@ -60,6 +60,11 @@ struct NotificationSettingsView: View {
                 } header: {
                     Text("general_text")
                 }
+                .onChange(of: vibrationEnabled) { _, isEnabled in
+                    if isEnabled {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    }
+                }
                 
                 Section {
                     PickerRowView(
@@ -95,7 +100,6 @@ struct NotificationSettingsView: View {
                     Button {
                         showAlert.toggle()
                         isPressed.toggle()
-//                        testNotification()
                     } label: {
                         HStack(spacing: 8) {
                             Image(systemName: "bell.and.waves.left.and.right")

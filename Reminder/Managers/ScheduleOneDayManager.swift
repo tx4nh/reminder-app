@@ -8,12 +8,15 @@ class ScheduleOneDayManager{
         print(response.status)
     }
     
-    func fetchSchedule(for uid: String) async throws -> [Schedule] {
+    func fetchSchedule(for uid: String, date: String) async throws -> [Schedule] {
         let schedule: [Schedule] = try await supabase.from(
             "schedules"
         ).select().eq(
             "user_uid",
             value: uid
+        ).eq(
+            "date",
+            value: date
         ).order(
             "time",
             ascending: true
@@ -21,7 +24,7 @@ class ScheduleOneDayManager{
         return schedule
     }
     
-    func deleteSchedule(text: String, for uid: String) async throws {
+    func deleteSchedule(text: String, for uid: String, date: String) async throws {
         let response = try await supabase.from(
             "schedules"
         ).delete().eq(
@@ -30,6 +33,9 @@ class ScheduleOneDayManager{
         ).eq(
             "user_uid",
             value: uid
+        ).eq(
+            "date",
+            value: date
         ).execute()
         print(response.status)
     }

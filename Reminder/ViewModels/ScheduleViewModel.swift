@@ -4,18 +4,19 @@ import Foundation
 class ScheduleViewModel{
     var scheduleView: [Schedule] = []
     
-    func insertSchedule(user_uid: String, text: String, time: String) async throws {
-        let schedule = Schedule(user_uid: user_uid, text: text, time: time)
+//    user_uid: String, text: String, time: String, date: String
+    func insertSchedule(schedule: Schedule) async throws {
+//        let schedule = Schedule(user_uid: newSchedule.user_uid, text: newSchedule.text, time: newSchedule.time, date: newSchedule.date)
         try await ScheduleOneDayManager.shared.insertSchedule(schedule: schedule)
         scheduleView.append(schedule)
     }
 
-    func fetchSchedule(for uid: String) async throws {
-        let result: [Schedule] = try await ScheduleOneDayManager.shared.fetchSchedule(for: uid)
+    func fetchSchedule(for uid: String, date: String) async throws {
+        let result: [Schedule] = try await ScheduleOneDayManager.shared.fetchSchedule(for: uid, date: date)
         self.scheduleView = result
     }
 
-    func deleteSchedule(text: String, for uid: String) async throws {
-        try await ScheduleOneDayManager.shared.deleteSchedule(text: text, for: uid)
+    func deleteSchedule(text: String, for uid: String, date: String) async throws {
+        try await ScheduleOneDayManager.shared.deleteSchedule(text: text, for: uid, date: date)
     }
 }

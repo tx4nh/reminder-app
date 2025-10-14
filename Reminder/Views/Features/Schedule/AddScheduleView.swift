@@ -166,24 +166,36 @@ struct AddScheduleView: View {
     }
     
     private func addSchedule() {
-        print(selectedDate)
+        let newSchedule = Schedule(
+            user_uid: appUser.uid,
+            text: text,
+            time: selectedDate.toTimeString(),
+            date: selectedDate.toDateString()
+        )
+        
+        Task {
+            do {
+                try await scheduleViewModel.insertSchedule(schedule: newSchedule)
+                presentationMode.wrappedValue.dismiss()
+            } catch {
+                print("Error: \(error)")
+            }
+        }
+    }
+}
+
+extension Date {
+    func toDateString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
+    
+    func toTimeString() -> String {
         let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: selectedDate)
-        let minute = calendar.component(.minute, from: selectedDate)
-        let time = String(format: "%02d:%02d", hour, minute)
-        
-        print(text, time, separator: " ")
-        
-         Task{
-             do{
-                 try await scheduleViewModel.insertSchedule(user_uid: appUser.uid, text: text, time: time)
-                 presentationMode.wrappedValue.dismiss()
-             } catch{
-                 print(error)
-             }
-         }
-        
-        presentationMode.wrappedValue.dismiss()
+        let hour = calendar.component(.hour, from: self)
+        let minute = calendar.component(.minute, from: self)
+        return String(format: "%02d:%02d", hour, minute)
     }
 }
 
