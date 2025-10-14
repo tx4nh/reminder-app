@@ -23,6 +23,22 @@
     "© 2024 Your Company Name. All rights reserved." : {
 
     },
+    "a_test_notification_will_be_sent_in_5_seconds.\nPlease_return_to your_phone's_home_screen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A test notification will be sent in 5 seconds.\\nPlease return to your phone's home screen"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông báo thử sẽ được gửi sau 5 giây.\\nVui lòng quay lại màn hình chính của điện thoại"
+          }
+        }
+      }
+    },
     "about_app" : {
       "localizations" : {
         "en" : {

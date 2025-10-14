@@ -18,6 +18,7 @@ struct NotificationSettingsView: View {
     @State private var userName: UserNameViewModel
     @State private var activeTimePicker: EventType?
     @State private var isPressed = false
+    @State private var showAlert = false
     
     init(appUser: AppUser) {
         self.appUser = appUser
@@ -92,8 +93,9 @@ struct NotificationSettingsView: View {
                 
                 VStack {
                     Button {
+                        showAlert.toggle()
                         isPressed.toggle()
-                        testNotification()
+//                        testNotification()
                     } label: {
                         HStack(spacing: 8) {
                             Image(systemName: "bell.and.waves.left.and.right")
@@ -136,6 +138,13 @@ struct NotificationSettingsView: View {
                     .fontWeight(.semibold)
                 }
             }
+            .alert("notification_text", isPresented: $showAlert) {
+                Button("OK") {
+                    testNotification()
+                    }
+                } message: {
+                    Text("a_test_notification_will_be_sent_in_5_seconds.\nPlease_return_to your_phone's_home_screen.")
+                }
         }
         .sheet(isPresented: $showSoundPicker) {
             SoundPickerView(selectedSound: $selectedSound)
