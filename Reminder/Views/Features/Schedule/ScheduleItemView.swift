@@ -5,6 +5,7 @@ struct ScheduleItemView: View {
     let colorIndex: Int
     let appUser: AppUser
     var index = 0
+    @State private var selectedDate = Date()
     @State private var scheduleViewModel = ScheduleViewModel()
     @State private var showDeleteAlert: Bool = false
 
@@ -89,7 +90,7 @@ struct ScheduleItemView: View {
             Button("delete_text", role: .destructive) {
                 Task{
                     do{
-                        try await scheduleViewModel.deleteSchedule(text: schedule.text, for: appUser.uid)
+                        try await scheduleViewModel.deleteSchedule(text: schedule.text, for: appUser.uid, date: selectedDate.toDateString())
                     } catch {
                         print("Error Delete")
                     }
@@ -102,5 +103,5 @@ struct ScheduleItemView: View {
 }
 
 #Preview {
-    ScheduleItemView(schedule: Schedule(user_uid: "2311", text: "Game", time: "12:00"), colorIndex: 0, appUser: AppUser(uid: "2311", email: "atd@gmail.com"))
+    ScheduleItemView(schedule: Schedule(user_uid: "2311", text: "Game", time: "12:00", date: "23/11/2005"), colorIndex: 0, appUser: AppUser(uid: "2311", email: "atd@gmail.com"))
 }

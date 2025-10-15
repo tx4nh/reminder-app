@@ -2,7 +2,9 @@ import SwiftUI
 
 struct ScheduleView: View {
     let appUser: AppUser
+    let selectedDay: String
     @State private var viewModel = ScheduleViewModel()
+    @State private var selectedDate = Date()
     
     var body: some View {
         NavigationView {
@@ -34,7 +36,7 @@ struct ScheduleView: View {
                     .listStyle(.plain)
                     .refreshable {
                         do{
-                            try await viewModel.fetchSchedule(for: appUser.uid)
+                            try await viewModel.fetchSchedule(for: appUser.uid, date: selectedDay)
                         } catch{
                             print("Error fetch")
                         }
@@ -43,9 +45,9 @@ struct ScheduleView: View {
             }
             .navigationBarHidden(true)
         }
-        .task {
+        .task(id: selectedDay) {
             do{
-                try await viewModel.fetchSchedule(for: appUser.uid)
+                try await viewModel.fetchSchedule(for: appUser.uid, date: selectedDay)
             } catch{
                 print("Error fetch")
             }
@@ -54,6 +56,6 @@ struct ScheduleView: View {
 }
 
 #Preview {
-    ScheduleView(appUser: AppUser(uid: "2311", email: "atdevv@gmail.com"))
+    ScheduleView(appUser: AppUser(uid: "2311", email: "atdevv@gmail.com"), selectedDay: "23/11/2005")
 }
 

@@ -56,6 +56,7 @@ struct AddYearlyEventView: View {
                         DatePicker("", selection: $selectedDate, displayedComponents: [.date])
                             .datePickerStyle(.compact)
                             .labelsHidden()
+                            .environment(\.locale, Locale(identifier: ""))
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 10)

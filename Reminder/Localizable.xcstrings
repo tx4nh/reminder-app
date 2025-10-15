@@ -283,6 +283,9 @@
         }
       }
     },
+    "Chọn ngày" : {
+
+    },
     "comeback_text" : {
       "localizations" : {
         "en" : {
@@ -705,6 +708,12 @@
           }
         }
       }
+    },
+    "Ngày đã chọn: %@" : {
+
+    },
+    "Ngày được chọn" : {
+
     },
     "Ngày trong tuần" : {
 

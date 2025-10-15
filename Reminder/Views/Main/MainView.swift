@@ -6,12 +6,8 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {                
-                DateListView()
+                DateListView(appUser: appUser)
                     .padding(.horizontal, 5)
-                
-                Spacer()
-                
-                ScheduleView(appUser: appUser)
                 
                 Spacer()
 

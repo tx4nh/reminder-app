@@ -1,22 +1,25 @@
 import SwiftUI
 
 struct DateView: View {
-    let day: Int
+    let offset: Int
     let isSelected: Bool
-    @State private var today = Date()
+    let baseDate: Date
     @Environment(AppLanguageManager.self) var appLanguage
 
-    private var isToday: Bool {
-        return day == Calendar.current.component(.day, from: today)
+    private var displayDate: Date {
+        Calendar.current.date(byAdding: .day, value: offset, to: baseDate) ?? baseDate
     }
     
-    private var dateForDay: Date? {
-        var components = Calendar.current.dateComponents([.year, .month], from: today)
-        components.day = 1
-        guard let firstDayOfMonth = Calendar.current.date(from: components) else {
-            return nil
-        }
-        return Calendar.current.date(byAdding: .day, value: day - 1, to: firstDayOfMonth)
+    private var isToday: Bool {
+        offset == 0
+    }
+    
+    private var day: Int {
+        Calendar.current.component(.day, from: displayDate)
+    }
+    
+    private var month: Int {
+        Calendar.current.component(.month, from: displayDate)
     }
     
     private func weekdayAbbreviation(for date: Date) -> String {
@@ -37,24 +40,22 @@ struct DateView: View {
                 .frame(width: 50, height: 60)
 
             VStack(spacing: 6) {
-                Text(String(format: "%02d", Calendar.current.component(.day, from: dateForDay ?? today)))
+                Text(String(format: "%02d", day))
                     .foregroundStyle(isToday ? .white : isSelected ? .blue : .gray)
                     .font(.title2)
                     .fontWeight(.bold)
 
                 HStack(spacing: 4) {
-                    Text(weekdayAbbreviation(for: dateForDay ?? today))
-                    Text(String(format: "%02d", Calendar.current.component(.month, from: dateForDay ?? today)))
+                    Text(weekdayAbbreviation(for: displayDate))
+                    Text(String(format: "%02d", month))
                 }
                 .foregroundStyle(isToday ? .white : isSelected ? .blue : .gray)
                 .font(.caption)
-                .foregroundColor(.secondary)
             }
         }
     }
 }
 
-#Preview() {
-    DateView(day: 24, isSelected: false)
-        .environment(AppLanguageManager())
+#Preview {
+    DateView(offset: 0, isSelected: true, baseDate: Date()).environment(AppLanguageManager())
 }

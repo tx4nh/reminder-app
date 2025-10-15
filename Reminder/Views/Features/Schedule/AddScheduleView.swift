@@ -64,7 +64,7 @@ struct AddScheduleView: View {
                                 HStack {
                                     Image(systemName: "clock.fill")
                                         .foregroundColor(.orange)
-                                        .font(.title3)
+                                        .font(.callout)
                                     Text("notification_time")
                                         .font(.headline)
                                         .foregroundColor(.primary)
@@ -83,8 +83,37 @@ struct AddScheduleView: View {
                                         Text("selected_time")
                                             .font(.caption)
                                             .foregroundColor(.secondary)
-                                        Text(formatTime(selectedDate))
-                                            .font(.title2)
+                                        Text(selectedDate.formatTime())
+                                            .font(.callout)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.orange)
+                                    }
+                                }
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 12)
+                                .background(Color(.systemBackground))
+                                .cornerRadius(12)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                                )
+                                
+                                HStack {
+                                    DatePicker("Chọn ngày",
+                                             selection: $selectedDate,
+                                               displayedComponents: .date)
+                                        .datePickerStyle(CompactDatePickerStyle())
+                                        .labelsHidden()
+                                        .environment(\.locale, Locale(identifier: "en"))
+                                    
+                                    Spacer()
+                                    
+                                    VStack(alignment: .trailing) {
+                                        Text("Ngày được chọn")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                        Text(selectedDate.toDateString())
+                                            .font(.callout)
                                             .fontWeight(.semibold)
                                             .foregroundColor(.orange)
                                     }
@@ -158,13 +187,6 @@ struct AddScheduleView: View {
         }
     }
     
-    private func formatTime(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.locale = Locale(identifier: "vi_VN")
-        return formatter.string(from: date)
-    }
-    
     private func addSchedule() {
         let newSchedule = Schedule(
             user_uid: appUser.uid,
@@ -181,21 +203,6 @@ struct AddScheduleView: View {
                 print("Error: \(error)")
             }
         }
-    }
-}
-
-extension Date {
-    func toDateString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: self)
-    }
-    
-    func toTimeString() -> String {
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: self)
-        let minute = calendar.component(.minute, from: self)
-        return String(format: "%02d:%02d", hour, minute)
     }
 }
 
