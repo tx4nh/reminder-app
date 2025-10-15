@@ -14,4 +14,86 @@ A SwiftUI-based reminder application with schedule management, user authenticati
 
 ## Architecture Structure
 
+```
+Reminder/
+│
+├── Managers/
+│   ├── AppLanguageManager
+│   ├── AuthManager
+│   ├── EventManager
+│   ├── NotificationManager
+│   ├── ScheduleOneDayManager
+│   └── SoundManager
+│
+├── Models/
+│   ├── AppUser
+│   ├── Event
+│   ├── Language
+│   ├── Schedule
+│   └── Sound
+│
+├── Sounds/
+│
+├── ViewModels/
+│   ├── DateSelectionViewModel
+│   ├── EventViewModel
+│   ├── ScheduleViewModel
+│   ├── SignInViewModel
+│   ├── ThemeViewModel
+│   └── UserNameViewModel
+│
+├── Views/
+│   ├── Components/
+│   │   ├── ButtonLoadData
+│   │   ├── CustomTextFieldView
+│   │   ├── InfoRowView
+│   │   ├── PickerRowView
+│   │   ├── SecureFieldView
+│   │   ├── SettingRowView
+│   │   ├── SoundPickerView
+│   │   ├── TextFieldView
+│   │   ├── TimeNotification
+│   │   ├── TimePickerView
+│   │   └── ToggleRowView
+│   │
+│   ├── Features/
+│   │   ├── Authentication/
+│   │   │   ├── LoadingView
+│   │   │   ├── RegisterView
+│   │   │   └── SignInView
+│   │   │
+│   │   ├── Date/
+│   │   │   ├── DateListView
+│   │   │   └── DateView
+│   │   │
+│   │   ├── Events/
+│   │   │   ├── AddWeeklyEventView
+│   │   │   ├── AddYearlyEventView
+│   │   │   ├── EventItemView
+│   │   │   └── EventView
+│   │   │
+│   │   ├── Schedule/
+│   │   │   ├── AddScheduleView
+│   │   │   ├── ScheduleItemView
+│   │   │   └── ScheduleView
+│   │   │
+│   │   └── Settings/
+│   │       ├── AboutView
+│   │       ├── ChangePasswordView
+│   │       ├── LanguageSettingView
+│   │       ├── NotificationBannerView
+│   │       ├── NotificationSettingsView
+│   │       ├── ProfileSettingsView
+│   │       └── SettingView
+│   │
+│   └── Main/
+│       ├── MainTabView
+│       ├── MainView
+│       └── ReminderAppView
+│
+└── Assets/
+├── Localizable
+├── Supabase(api_here)
+└── ReminderApp
 
+```
