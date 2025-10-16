@@ -78,7 +78,7 @@ struct ProfileSettingsView: View {
                             
                             CustomTextFieldView(
                                 icon: "person",
-                                placeholder: "enter_display_name",
+                                placeholder: LocalizedStringKey("enter_display_name"),
                                 text: $userName.name
                             )
                         }

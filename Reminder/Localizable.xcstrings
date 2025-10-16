@@ -27,14 +27,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "A test notification will be sent in 5 seconds.\\nPlease return to your phone's home screen"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thông báo thử sẽ được gửi sau 5 giây.\\nVui lòng quay lại màn hình chính của điện thoại"
+            "value" : "Hãy quay lại màn hình chính của bạn, thông báo sẽ được gửi sau 5 giây chờ"
           }
         }
       }
@@ -509,6 +509,16 @@
         }
       }
     },
+    "enter_display_name" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nhập tên của bạn"
+          }
+        }
+      }
+    },
     "enter_event_name" : {
       "localizations" : {
         "vi" : {
@@ -708,9 +718,6 @@
           }
         }
       }
-    },
-    "Ngày đã chọn: %@" : {
-
     },
     "Ngày được chọn" : {
 

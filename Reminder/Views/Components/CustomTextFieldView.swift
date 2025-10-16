@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CustomTextFieldView: View {
     let icon: String
-    let placeholder: String
+    let placeholder: LocalizedStringKey
     @Binding var text: String
     @FocusState private var isFocused: Bool
     @State private var isPressed: Bool = false

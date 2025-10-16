@@ -27,7 +27,8 @@ struct NotificationBannerView: View {
                 NotificationManager.shared.scheduleNotification(
                     title: "Xin chào \(userName.name)",
                     subtitle: "Đây là thông báo ảo",
-                    timeInterval: 5
+                    timeInterval: 5,
+                    selectedSound: "default"
                 )
             } label: {
                 Text("Schedule Notification")

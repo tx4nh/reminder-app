@@ -30,10 +30,6 @@ struct DateListView: View {
                             )
                         )
                 }
-                
-                Text("Ngày đã chọn: \(dateManager.formattedDate)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
             }
             .padding(.top, 30)
             .padding(.bottom, 20)

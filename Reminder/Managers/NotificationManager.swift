@@ -13,11 +13,17 @@ class NotificationManager {
         }
     }
     
-    func scheduleNotification(title: String, subtitle: String, timeInterval: TimeInterval) {
+    func scheduleNotification(title: String, subtitle: String, timeInterval: TimeInterval, selectedSound: String) {
         let content = UNMutableNotificationContent()
         content.title = title
         content.subtitle = subtitle
-        content.sound = UNNotificationSound.default
+        
+        if selectedSound == "default" {
+            content.sound = .default
+        } else {
+            let soundFileName = "\(selectedSound).caf"
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundFileName))
+        }
         
         let trigger = UNTimeIntervalNotificationTrigger(
             timeInterval: timeInterval,

@@ -10,6 +10,10 @@ struct SoundPickerView: View {
         self._tempSelection = State(initialValue: selectedSound.wrappedValue)
     }
     
+    private func getSoundName(from file: String) -> String {
+        soundOptions.first(where: { $0.file == file })?.name ?? "Mặc định"
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -23,7 +27,7 @@ struct SoundPickerView: View {
                         
                         Spacer()
                         
-                        if tempSelection == soundName {
+                        if tempSelection == soundFile {
                             Image(systemName: "checkmark")
                                 .foregroundColor(.accentColor)
                                 .font(.system(size: 16, weight: .semibold))
@@ -32,7 +36,7 @@ struct SoundPickerView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         SoundManeger.shared.playSound(named: soundFile)
-                        tempSelection = soundName
+                        tempSelection = soundFile
                     }
                 }
             }
@@ -56,6 +60,7 @@ struct SoundPickerView: View {
         }
     }
 }
+
 #Preview {
-    SoundPickerView(selectedSound: .constant(""))
+    SoundPickerView(selectedSound: .constant("sound1"))
 }

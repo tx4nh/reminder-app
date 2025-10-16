@@ -7,7 +7,7 @@ struct NotificationSettingsView: View {
     @State private var soundEnabled = true
     @State private var vibrationEnabled = true
     @State private var badgeEnabled = true
-    @State private var selectedSound = "Mặc định"
+    @State private var selectedSound = "default"
 
     @State private var dailyEventTime = "1 giờ"
     @State private var weeklyEventTime = "1 ngày"
@@ -19,6 +19,10 @@ struct NotificationSettingsView: View {
     @State private var activeTimePicker: EventType?
     @State private var isPressed = false
     @State private var showAlert = false
+    
+    private var selectedSoundName: String {
+        soundOptions.first(where: { $0.file == selectedSound })?.name ?? "Mặc định"
+    }
     
     init(appUser: AppUser) {
         self.appUser = appUser
@@ -72,7 +76,7 @@ struct NotificationSettingsView: View {
                         title: "Âm thanh thông báo",
                         subtitle: "Chọn âm thanh cho thông báo",
                         iconColor: .orange,
-                        currentValue: selectedSound
+                        currentValue: selectedSoundName
                     ) {
                         showSoundPicker = true
                     }
@@ -118,7 +122,6 @@ struct NotificationSettingsView: View {
                                 )
                         )
                         .foregroundColor(.accentColor)
-                        .scaleEffect(isPressed ? 0.95 : 1.0)
                         .opacity(isPressed ? 0.8 : 1.0)
                         .animation(.easeInOut(duration: 0.1), value: isPressed)
                     }
@@ -144,7 +147,7 @@ struct NotificationSettingsView: View {
             }
             .alert("notification_text", isPresented: $showAlert) {
                 Button("OK") {
-                    testNotification()
+                        testNotification()
                     }
                 } message: {
                     Text("a_test_notification_will_be_sent_in_5_seconds.\nPlease_return_to your_phone's_home_screen.")
@@ -169,7 +172,8 @@ struct NotificationSettingsView: View {
         NotificationManager.shared.scheduleNotification(
             title: "Xin chào \(userName.name)",
             subtitle: "Đây là thông báo ảo",
-            timeInterval: 5
+            timeInterval: 5,
+            selectedSound: selectedSound
         )
     }
 

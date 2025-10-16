@@ -2,6 +2,7 @@ import Foundation
 import AVFAudio
 
 let soundOptions: [Sound] = [
+    Sound(name: "Mặc định", file: "default"),
     Sound(name: "Tỏa Sáng", file: "sound1"),
     Sound(name: "Nhẹ nhàng", file: "sound2"),
     Sound(name: "Dịu dàng", file: "sound3"),
