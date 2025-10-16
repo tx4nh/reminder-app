@@ -25,6 +25,7 @@ struct ReminderAppView: View {
         .animation(.easeInOut(duration: 0.3), value: appUser != nil)
         .onAppear {
             checkSession()
+            PermissionManager.shared.setupPermissions()
         }
     }
     
