@@ -38,4 +38,40 @@ class NotificationManager {
         
         UNUserNotificationCenter.current().add(request)
     }
+    
+    func scheduleDailyNotification(title: String, subtitle: String, selectedSound: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = subtitle
+        
+        if selectedSound == "default" {
+            content.sound = .default
+        } else {
+            let soundFileName = "\(selectedSound).caf"
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundFileName))
+        }
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 7
+        dateComponents.minute = 0
+        
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: dateComponents,
+            repeats: true
+        )
+        
+        let request = UNNotificationRequest(
+            identifier: "dailyMorningNotification",
+            content: content,
+            trigger: trigger
+        )
+        
+        UNUserNotificationCenter.current().add(request)
+    }
+    
+    func cancelDailyNotification() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: ["dailyMorningNotification"]
+        )
+    }
 }

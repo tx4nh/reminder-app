@@ -7,6 +7,7 @@ struct NotificationSettingsView: View {
     @State private var soundEnabled = true
     @State private var vibrationEnabled = true
     @State private var badgeEnabled = true
+    @State private var isDailyReminderEnabled = true
     @State private var selectedSound = "default"
 
     @State private var dailyEventTime = "1 giờ"
@@ -61,15 +62,35 @@ struct NotificationSettingsView: View {
                         iconColor: .purple,
                         isOn: $vibrationEnabled
                     )
+                    .onChange(of: vibrationEnabled) { _, isEnabled in
+                        if isEnabled {
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        }
+                    }
+                    
+                    ToggleRowView(
+                        icon: "sun.horizon",
+                        title: "Gửi lời chào sáng",
+                        subtitle: "Healing",
+                        iconColor: .orange,
+                        isOn: $isDailyReminderEnabled
+                    )
+                    .onChange(of: isDailyReminderEnabled) { oldValue, newValue in
+                        if newValue {
+                            NotificationManager.shared.scheduleDailyNotification(
+                                title: "Chào buổi sáng \(userName.name)",
+                                subtitle: "Chúc bạn có một ngày tốt lành 😘",
+                                selectedSound: "default"
+                            )
+                        } else {
+                            NotificationManager.shared.cancelDailyNotification()
+                        }
+                        UserDefaults.standard.set(newValue, forKey: "isDailyReminderEnabled")
+                    }
                 } header: {
                     Text("general_text")
                 }
-                .onChange(of: vibrationEnabled) { _, isEnabled in
-                    if isEnabled {
-                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    }
-                }
-                
+
                 Section {
                     PickerRowView(
                         icon: "speaker.wave.3",
